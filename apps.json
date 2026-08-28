@@ -4,7 +4,6 @@
       "id": "produccion",
       "nombre": "Producción",
       "icono": "⚙️",
-      "responsable": "persona-1",
       "apps": [
         {
           "id": "produccion-planning",
@@ -26,7 +25,6 @@
       "id": "calidad",
       "nombre": "Calidad",
       "icono": "✅",
-      "responsable": "persona-2",
       "apps": [
         {
           "id": "zx-calidad-quejas",
@@ -48,7 +46,6 @@
       "id": "administracion",
       "nombre": "Administración",
       "icono": "🗂️",
-      "responsable": "persona-3",
       "apps": [
         {
           "id": "vacamanager",
@@ -65,6 +62,48 @@
           "rolesPermitidos": ["*"]
         }
       ]
+    },
+    {
+      "id": "adminproductiva",
+      "nombre": "Administración Productiva",
+      "icono": "📋",
+      "apps": []
+    },
+    {
+      "id": "comercial",
+      "nombre": "Comercial",
+      "icono": "💼",
+      "apps": []
+    },
+    {
+      "id": "direccion",
+      "nombre": "Dirección",
+      "icono": "🧭",
+      "apps": []
+    },
+    {
+      "id": "ingenieria",
+      "nombre": "Ingeniería / Mantenimiento",
+      "icono": "🔧",
+      "apps": []
+    },
+    {
+      "id": "mc",
+      "nombre": "Mejora Continua",
+      "icono": "📈",
+      "apps": []
+    },
+    {
+      "id": "planeacion",
+      "nombre": "Planeación",
+      "icono": "🗓️",
+      "apps": []
+    },
+    {
+      "id": "rh",
+      "nombre": "Recursos Humanos",
+      "icono": "👥",
+      "apps": []
     }
   ]
 }
