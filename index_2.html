@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>PortalZX — Demo de estructura</title>
+<style>
+  :root{
+    --zx-blue-dark:#0D18A8;
+    --zx-blue:#227EF6;
+    --bg:#f4f6fb;
+    --panel:#ffffff;
+    --text:#1c2233;
+    --muted:#6b7385;
+    --border:#e3e7f1;
+  }
+  [data-theme="dark"]{
+    --bg:#0b0e17;
+    --panel:#141a2b;
+    --text:#eef1fa;
+    --muted:#9aa3ba;
+    --border:#232b42;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Segoe UI', Poppins, Arial, sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    display:flex;
+    height:100vh;
+    overflow:hidden;
+  }
+  #sidebar{
+    width:280px;
+    background:var(--panel);
+    border-right:1px solid var(--border);
+    display:flex;
+    flex-direction:column;
+    overflow-y:auto;
+  }
+  #sidebar-header{
+    padding:18px 16px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    border-bottom:1px solid var(--border);
+    background:linear-gradient(135deg,var(--zx-blue-dark),var(--zx-blue));
+    color:#fff;
+  }
+  #sidebar-header h1{font-size:16px;margin:0;font-weight:600;letter-spacing:.5px;}
+  #theme-toggle{
+    background:rgba(255,255,255,.15);
+    border:none;
+    color:#fff;
+    border-radius:6px;
+    padding:6px 8px;
+    cursor:pointer;
+    font-size:13px;
+  }
+  .area-block{border-bottom:1px solid var(--border);}
+  .area-title{
+    padding:12px 16px;
+    font-size:12px;
+    font-weight:700;
+    text-transform:uppercase;
+    color:var(--muted);
+    letter-spacing:.6px;
+  }
+  .app-item{
+    padding:10px 16px 10px 28px;
+    cursor:pointer;
+    font-size:14px;
+    display:flex;
+    flex-direction:column;
+    gap:2px;
+    border-left:3px solid transparent;
+  }
+  .app-item:hover{background:rgba(34,126,246,.08);}
+  .app-item.active{
+    background:rgba(34,126,246,.12);
+    border-left:3px solid var(--zx-blue);
+  }
+  .app-item .app-desc{font-size:11px;color:var(--muted);}
+  #main{flex:1;display:flex;flex-direction:column;}
+  #topbar{
+    padding:10px 18px;
+    border-bottom:1px solid var(--border);
+    background:var(--panel);
+    font-size:13px;
+    color:var(--muted);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  #reload-btn{
+    border:1px solid var(--border);
+    background:transparent;
+    color:var(--text);
+    border-radius:6px;
+    padding:4px 10px;
+    cursor:pointer;
+    font-size:12px;
+  }
+  iframe{flex:1;border:none;width:100%;background:#fff;}
+  #placeholder{
+    flex:1;display:flex;align-items:center;justify-content:center;
+    color:var(--muted);font-size:14px;text-align:center;padding:20px;
+  }
+</style>
+</head>
+<body data-theme="light">
+
+  <div id="sidebar">
+    <div id="sidebar-header">
+      <h1>ESPACIO ZUBEX</h1>
+      <button id="theme-toggle" onclick="toggleTheme()">🌙</button>
+    </div>
+    <div id="areas-container">Cargando apps.json…</div>
+  </div>
+
+  <div id="main">
+    <div id="topbar">
+      <span id="current-app-label">Selecciona una herramienta del menú</span>
+      <button id="reload-btn" onclick="reloadFrame()">⟳ Recargar</button>
+    </div>
+    <div id="placeholder">
+      👈 El contenido de cada app se carga aquí sin salir del portal
+    </div>
+    <iframe id="app-frame" style="display:none"></iframe>
+  </div>
+
+<script>
+// ---------------------------------------------------------------
+// PATRÓN CLAVE: el sidebar NO tiene las apps hardcodeadas.
+// Lee apps.json en cada carga. Cada área agrega/edita SU bloque
+// dentro de ese archivo -> conflictos de merge mínimos y aislados.
+// ---------------------------------------------------------------
+
+let currentUserRole = "*"; // placeholder: aquí luego se conecta el login real
+
+async function cargarApps() {
+  const contenedor = document.getElementById("areas-container");
+  try {
+    const res = await fetch("apps.json?_=" + Date.now()); // cache-busting simple
+    const data = await res.json();
+
+    contenedor.innerHTML = "";
+    data.areas.forEach(area => {
+      const bloque = document.createElement("div");
+      bloque.className = "area-block";
+
+      const titulo = document.createElement("div");
+      titulo.className = "area-title";
+      titulo.textContent = `${area.icono} ${area.nombre}`;
+      bloque.appendChild(titulo);
+
+      area.apps
+        .filter(app => appVisibleParaUsuario(app))
+        .forEach(app => {
+          const item = document.createElement("div");
+          item.className = "app-item";
+          item.innerHTML = `<strong>${app.nombre}</strong><span class="app-desc">${app.descripcion || ""}</span>`;
+          item.onclick = () => abrirApp(app, item);
+          bloque.appendChild(item);
+        });
+
+      contenedor.appendChild(bloque);
+    });
+  } catch (err) {
+    contenedor.innerHTML = `<div style="padding:16px;color:#c0392b;font-size:13px">
+      No se pudo cargar apps.json (${err.message})
+    </div>`;
+  }
+}
+
+// Filtro de acceso: hoy todo pasa con "*". El día que activen
+// usuarios, solo se cambia esta función — nada más en el sistema.
+function appVisibleParaUsuario(app) {
+  if (!app.rolesPermitidos || app.rolesPermitidos.includes("*")) return true;
+  return app.rolesPermitidos.includes(currentUserRole);
+}
+
+function abrirApp(app, itemEl) {
+  document.querySelectorAll(".app-item").forEach(el => el.classList.remove("active"));
+  itemEl.classList.add("active");
+  document.getElementById("current-app-label").textContent = app.nombre;
+
+  const frame = document.getElementById("app-frame");
+  frame.src = app.url;
+  frame.style.display = "block";
+  document.getElementById("placeholder").style.display = "none";
+}
+
+function reloadFrame() {
+  const frame = document.getElementById("app-frame");
+  if (frame.src) frame.src = frame.src.split("?")[0] + "?_=" + Date.now();
+}
+
+function toggleTheme() {
+  const body = document.body;
+  const isDark = body.getAttribute("data-theme") === "dark";
+  body.setAttribute("data-theme", isDark ? "light" : "dark");
+  document.getElementById("theme-toggle").textContent = isDark ? "🌙" : "☀️";
+}
+
+cargarApps();
+</script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+{
+  "areas": [
+    {
+      "id": "produccion",
+      "nombre": "Producción",
+      "icono": "⚙️",
+      "responsable": "persona-1",
+      "apps": [
+        {
+          "id": "produccion-planning",
+          "nombre": "Programa de Producción",
+          "url": "https://gamabet26.github.io/produccion-planning/",
+          "descripcion": "Planificación de producción, reemplazo del Excel",
+          "rolesPermitidos": ["*"]
+        },
+        {
+          "id": "ztela-zx",
+          "nombre": "Ztela ZX",
+          "url": "https://gamabet26.github.io/ztela-zx/",
+          "descripcion": "Registro de bobinas",
+          "rolesPermitidos": ["*"]
+        }
+      ]
+    },
+    {
+      "id": "calidad",
+      "nombre": "Calidad",
+      "icono": "✅",
+      "responsable": "persona-2",
+      "apps": [
+        {
+          "id": "zx-calidad-quejas",
+          "nombre": "Quejas de Cliente",
+          "url": "https://gamabet26.github.io/zx-calidad/quejas/",
+          "descripcion": "Seguimiento de quejas de cliente",
+          "rolesPermitidos": ["*"]
+        },
+        {
+          "id": "zx-calidad-equipos",
+          "nombre": "CalidadZX",
+          "url": "https://gamabet26.github.io/zx-calidad/equipos/",
+          "descripcion": "Registro de equipos de calidad",
+          "rolesPermitidos": ["*"]
+        }
+      ]
+    },
+    {
+      "id": "administracion",
+      "nombre": "Administración",
+      "icono": "🗂️",
+      "responsable": "persona-3",
+      "apps": [
+        {
+          "id": "vacamanager",
+          "nombre": "VacaManager",
+          "url": "https://gamabet26.github.io/vacamanager/",
+          "descripcion": "Gestión de vacaciones y permisos",
+          "rolesPermitidos": ["*"]
+        },
+        {
+          "id": "valesref",
+          "nombre": "ValesREF",
+          "url": "https://gamabet26.github.io/valesref/",
+          "descripcion": "Vales digitales de salida de almacén",
+          "rolesPermitidos": ["*"]
+        }
+      ]
+    }
+  ]
+}
