@@ -8,15 +8,17 @@
         {
           "id": "produccion-planning",
           "nombre": "Programa de Producción",
-          "url": "https://gamabet26.github.io/produccion-planning/",
+          "url": null,
+          "estado": "en_desarrollo",
           "descripcion": "Planificación de producción, reemplazo del Excel",
           "rolesPermitidos": ["*"]
         },
         {
           "id": "ztela-zx",
           "nombre": "Ztela ZX",
-          "url": "https://gamabet26.github.io/ztela-zx/",
-          "descripcion": "Registro de bobinas",
+          "url": null,
+          "estado": "en_desarrollo",
+          "descripcion": "Registro de bobinas (backend pendiente con Chuy)",
           "rolesPermitidos": ["*"]
         }
       ]
@@ -29,15 +31,17 @@
         {
           "id": "zx-calidad-quejas",
           "nombre": "Quejas de Cliente",
-          "url": "https://gamabet26.github.io/zx-calidad/quejas/",
-          "descripcion": "Seguimiento de quejas de cliente",
+          "url": null,
+          "estado": "en_desarrollo",
+          "descripcion": "Seguimiento de quejas de cliente (VEN-F-03, 8D)",
           "rolesPermitidos": ["*"]
         },
         {
           "id": "zx-calidad-equipos",
           "nombre": "CalidadZX",
-          "url": "https://gamabet26.github.io/zx-calidad/equipos/",
-          "descripcion": "Registro de equipos de calidad",
+          "url": "https://gamabet26.github.io/ZX-Calidad/",
+          "estado": "activa",
+          "descripcion": "Registro de equipos de medición",
           "rolesPermitidos": ["*"]
         }
       ]
@@ -48,17 +52,64 @@
       "icono": "🗂️",
       "apps": [
         {
-          "id": "vacamanager",
-          "nombre": "VacaManager",
-          "url": "https://gamabet26.github.io/vacamanager/",
-          "descripcion": "Gestión de vacaciones y permisos",
+          "id": "valesref",
+          "nombre": "ValesREF",
+          "url": "https://gamabet26.github.io/ValesREF/",
+          "estado": "activa",
+          "descripcion": "Vales digitales de salida de almacén",
           "rolesPermitidos": ["*"]
         },
         {
-          "id": "valesref",
-          "nombre": "ValesREF",
-          "url": "https://gamabet26.github.io/valesref/",
-          "descripcion": "Vales digitales de salida de almacén",
+          "id": "zubexface",
+          "nombre": "ZubexFace",
+          "url": null,
+          "estado": "en_desarrollo",
+          "descripcion": "Control de acceso vehicular / reconocimiento facial",
+          "rolesPermitidos": ["*"]
+        }
+      ]
+    },
+    {
+      "id": "rh",
+      "nombre": "Recursos Humanos",
+      "icono": "👥",
+      "apps": [
+        {
+          "id": "vacamanager",
+          "nombre": "VacaManager",
+          "url": "https://gamabet26.github.io/VacaionesZX/",
+          "estado": "activa",
+          "descripcion": "Gestión de vacaciones y permisos",
+          "rolesPermitidos": ["*"]
+        }
+      ]
+    },
+    {
+      "id": "mc",
+      "nombre": "Mejora Continua",
+      "icono": "📈",
+      "apps": [
+        {
+          "id": "kaizenzx",
+          "nombre": "KaizenZX",
+          "url": "https://gamabet26.github.io/KaizenZX/",
+          "estado": "activa",
+          "descripcion": "Gestión de proyectos Kaizen",
+          "rolesPermitidos": ["*"]
+        }
+      ]
+    },
+    {
+      "id": "direccion",
+      "nombre": "Dirección",
+      "icono": "🧭",
+      "apps": [
+        {
+          "id": "zx-ptes",
+          "nombre": "ZX-PTES",
+          "url": "https://gamabet26.github.io/ZX-PTES/",
+          "estado": "activa",
+          "descripcion": "Tablero de tareas estilo Jira (con asistente Bexuz)",
           "rolesPermitidos": ["*"]
         }
       ]
@@ -67,7 +118,31 @@
       "id": "adminproductiva",
       "nombre": "Administración Productiva",
       "icono": "📋",
-      "apps": []
+      "apps": [
+        {
+          "id": "tablero-mp",
+          "nombre": "Tablero MP",
+          "url": null,
+          "estado": "en_desarrollo",
+          "descripcion": "Recepción de materia prima (Compras, Vigilancia, Recibo MP)",
+          "rolesPermitidos": ["*"]
+        }
+      ]
+    },
+    {
+      "id": "ingenieria",
+      "nombre": "Ingeniería / Mantenimiento",
+      "icono": "🔧",
+      "apps": [
+        {
+          "id": "sap-item-automation",
+          "nombre": "Automatización de Altas SAP",
+          "url": null,
+          "estado": "en_desarrollo",
+          "descripcion": "Automatiza la creación de artículos en SAP B1 (DTW)",
+          "rolesPermitidos": ["*"]
+        }
+      ]
     },
     {
       "id": "comercial",
@@ -76,33 +151,9 @@
       "apps": []
     },
     {
-      "id": "direccion",
-      "nombre": "Dirección",
-      "icono": "🧭",
-      "apps": []
-    },
-    {
-      "id": "ingenieria",
-      "nombre": "Ingeniería / Mantenimiento",
-      "icono": "🔧",
-      "apps": []
-    },
-    {
-      "id": "mc",
-      "nombre": "Mejora Continua",
-      "icono": "📈",
-      "apps": []
-    },
-    {
       "id": "planeacion",
       "nombre": "Planeación",
       "icono": "🗓️",
-      "apps": []
-    },
-    {
-      "id": "rh",
-      "nombre": "Recursos Humanos",
-      "icono": "👥",
       "apps": []
     }
   ]
