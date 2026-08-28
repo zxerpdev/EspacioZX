@@ -11,7 +11,9 @@
           "url": null,
           "estado": "en_desarrollo",
           "descripcion": "Planificación de producción, reemplazo del Excel",
-          "rolesPermitidos": ["*"]
+          "rolesPermitidos": [
+            "*"
+          ]
         },
         {
           "id": "ztela-zx",
@@ -19,7 +21,9 @@
           "url": null,
           "estado": "en_desarrollo",
           "descripcion": "Registro de bobinas (backend pendiente con Chuy)",
-          "rolesPermitidos": ["*"]
+          "rolesPermitidos": [
+            "*"
+          ]
         }
       ]
     },
@@ -34,7 +38,9 @@
           "url": null,
           "estado": "en_desarrollo",
           "descripcion": "Seguimiento de quejas de cliente (VEN-F-03, 8D)",
-          "rolesPermitidos": ["*"]
+          "rolesPermitidos": [
+            "*"
+          ]
         },
         {
           "id": "zx-calidad-equipos",
@@ -42,7 +48,9 @@
           "url": "https://gamabet26.github.io/ZX-Calidad/",
           "estado": "activa",
           "descripcion": "Registro de equipos de medición",
-          "rolesPermitidos": ["*"]
+          "rolesPermitidos": [
+            "*"
+          ]
         }
       ]
     },
@@ -53,19 +61,13 @@
       "apps": [
         {
           "id": "valesref",
-          "nombre": "ValesREF",
+          "nombre": "Vales de Refacciones",
           "url": "https://gamabet26.github.io/ValesREF/",
-          "estado": "activa",
-          "descripcion": "Vales digitales de salida de almacén",
-          "rolesPermitidos": ["*"]
-        },
-        {
-          "id": "zubexface",
-          "nombre": "ZubexFace",
-          "url": null,
           "estado": "en_desarrollo",
-          "descripcion": "Control de acceso vehicular / reconocimiento facial",
-          "rolesPermitidos": ["*"]
+          "descripcion": "Vales digitales de salida de almacén",
+          "rolesPermitidos": [
+            "*"
+          ]
         }
       ]
     },
@@ -76,11 +78,13 @@
       "apps": [
         {
           "id": "vacamanager",
-          "nombre": "VacaManager",
+          "nombre": "Vacaciones",
           "url": "https://gamabet26.github.io/VacaionesZX/",
           "estado": "activa",
           "descripcion": "Gestión de vacaciones y permisos",
-          "rolesPermitidos": ["*"]
+          "rolesPermitidos": [
+            "*"
+          ]
         }
       ]
     },
@@ -91,11 +95,13 @@
       "apps": [
         {
           "id": "kaizenzx",
-          "nombre": "KaizenZX",
+          "nombre": "Kaizen",
           "url": "https://gamabet26.github.io/KaizenZX/",
           "estado": "activa",
           "descripcion": "Gestión de proyectos Kaizen",
-          "rolesPermitidos": ["*"]
+          "rolesPermitidos": [
+            "*"
+          ]
         }
       ]
     },
@@ -110,7 +116,9 @@
           "url": "https://gamabet26.github.io/ZX-PTES/",
           "estado": "activa",
           "descripcion": "Tablero de tareas estilo Jira (con asistente Bexuz)",
-          "rolesPermitidos": ["*"]
+          "rolesPermitidos": [
+            "*"
+          ]
         }
       ]
     },
@@ -122,10 +130,12 @@
         {
           "id": "tablero-mp",
           "nombre": "Tablero MP",
-          "url": null,
-          "estado": "en_desarrollo",
+          "url": "https://gamabet26.github.io/MP-Tablero/",
+          "estado": "activa",
           "descripcion": "Recepción de materia prima (Compras, Vigilancia, Recibo MP)",
-          "rolesPermitidos": ["*"]
+          "rolesPermitidos": [
+            "*"
+          ]
         }
       ]
     },
@@ -140,7 +150,9 @@
           "url": null,
           "estado": "en_desarrollo",
           "descripcion": "Automatiza la creación de artículos en SAP B1 (DTW)",
-          "rolesPermitidos": ["*"]
+          "rolesPermitidos": [
+            "*"
+          ]
         }
       ]
     },
