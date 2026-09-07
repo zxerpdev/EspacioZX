@@ -58,18 +58,7 @@
       "id": "administracion",
       "nombre": "Administración",
       "icono": "🗂️",
-      "apps": [
-        {
-          "id": "valesref",
-          "nombre": "Vales de Refacciones",
-          "url": "https://gamabet26.github.io/ValesREF/",
-          "estado": "en_desarrollo",
-          "descripcion": "Vales digitales de salida de almacén",
-          "rolesPermitidos": [
-            "*"
-          ]
-        }
-      ]
+      "apps": []
     },
     {
       "id": "rh",
@@ -80,7 +69,7 @@
           "id": "vacamanager",
           "nombre": "Vacaciones",
           "url": "https://gamabet26.github.io/VacaionesZX/",
-          "estado": "activa",
+          "estado": "en_desarrollo",
           "descripcion": "Gestión de vacaciones y permisos",
           "rolesPermitidos": [
             "*"
@@ -123,23 +112,6 @@
       ]
     },
     {
-      "id": "adminproductiva",
-      "nombre": "Administración Productiva",
-      "icono": "📋",
-      "apps": [
-        {
-          "id": "tablero-mp",
-          "nombre": "Tablero MP",
-          "url": "https://gamabet26.github.io/MP-Tablero/",
-          "estado": "activa",
-          "descripcion": "Recepción de materia prima (Compras, Vigilancia, Recibo MP)",
-          "rolesPermitidos": [
-            "*"
-          ]
-        }
-      ]
-    },
-    {
       "id": "ingenieria",
       "nombre": "Ingeniería / Mantenimiento",
       "icono": "🔧",
@@ -167,6 +139,65 @@
       "nombre": "Planeación",
       "icono": "🗓️",
       "apps": []
+    },
+    {
+      "id": "adminproductiva",
+      "nombre": "Administración Productiva",
+      "icono": "📋",
+      "subareas": [
+        {
+          "id": "almacen",
+          "nombre": "Almacén",
+          "icono": "📦",
+          "apps": [
+            {
+              "id": "valesref",
+              "nombre": "Vales de Refacciones",
+              "url": "https://gamabet26.github.io/ValesREF/",
+              "estado": "en_desarrollo",
+              "descripcion": "Vales digitales de salida de almacén",
+              "rolesPermitidos": [
+                "*"
+              ]
+            },
+            {
+              "id": "tablero-mp",
+              "nombre": "Tablero MP",
+              "url": "https://gamabet26.github.io/MP-Tablero/",
+              "estado": "activa",
+              "descripcion": "Recepción de materia prima (Compras, Vigilancia, Recibo MP)",
+              "rolesPermitidos": [
+                "*"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "erp",
+          "nombre": "ERP",
+          "icono": "🧾",
+          "apps": []
+        },
+        {
+          "id": "logistica",
+          "nombre": "Logística",
+          "icono": "🚚",
+          "apps": []
+        }
+      ]
+    },
+    {
+      "id": "ventas",
+      "nombre": "Ventas",
+      "icono": "🛒",
+      "apps": []
+    }
+  ],
+  "anuncios": [
+    {
+      "titulo": "Bienvenidos a Espacio Zubex",
+      "fecha": "2026-09-07",
+      "texto": "El portal está en construcción. Iremos agregando aplicaciones por área conforme estén listas."
     }
   ]
 }
