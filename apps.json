@@ -6,16 +6,6 @@
       "icono": "⚙️",
       "apps": [
         {
-          "id": "produccion-planning",
-          "nombre": "Programa de Producción",
-          "url": null,
-          "estado": "en_desarrollo",
-          "descripcion": "Planificación de producción, reemplazo del Excel",
-          "rolesPermitidos": [
-            "*"
-          ]
-        },
-        {
           "id": "ztela-zx",
           "nombre": "Ztela ZX",
           "url": null,
@@ -138,7 +128,18 @@
       "id": "planeacion",
       "nombre": "Planeación",
       "icono": "🗓️",
-      "apps": []
+      "apps": [
+        {
+          "id": "produccion-planning",
+          "nombre": "Programa de Producción",
+          "url": null,
+          "estado": "en_desarrollo",
+          "descripcion": "Planificación de producción, reemplazo del Excel",
+          "rolesPermitidos": [
+            "*"
+          ]
+        }
+      ]
     },
     {
       "id": "adminproductiva",
