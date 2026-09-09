@@ -64,6 +64,16 @@
           "rolesPermitidos": [
             "*"
           ]
+        },
+        {
+          "id": "expediente-medico",
+          "nombre": "Expediente Médico",
+          "url": null,
+          "estado": "en_desarrollo",
+          "descripcion": "Medico ZX — expedientes médicos del personal",
+          "rolesPermitidos": [
+            "*"
+          ]
         }
       ]
     },
