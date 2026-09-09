@@ -132,9 +132,9 @@
         {
           "id": "produccion-planning",
           "nombre": "Programa de Producción",
-          "url": null,
-          "estado": "en_desarrollo",
-          "descripcion": "Planificación de producción, reemplazo del Excel",
+          "url": "https://zxerpdev.github.io/programa-produccion/",
+          "estado": "activa",
+          "descripcion": "Programador de producción (demo — backend de órdenes aún pendiente)",
           "rolesPermitidos": [
             "*"
           ]
