@@ -132,7 +132,7 @@
         {
           "id": "produccion-planning",
           "nombre": "Programa de Producción",
-          "url": "https://zxerpdev.github.io/programa-produccion/",
+          "url": "https://zxerpdev.github.io/Programa-de-Produccion/",
           "estado": "activa",
           "descripcion": "Programador de producción (demo — backend de órdenes aún pendiente)",
           "rolesPermitidos": [
