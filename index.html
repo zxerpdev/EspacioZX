@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Espacio Zubex</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
     --zx-blue-dark:#0D18A8;
@@ -460,55 +463,122 @@
   #home{
     flex:1;
     overflow-y:auto;
-    padding:40px 24px 30px;
+    padding:48px 24px 40px;
     background:
-      radial-gradient(500px 300px at 15% -10%, rgba(34,126,246,.08), transparent 60%),
-      radial-gradient(500px 300px at 90% 0%, rgba(13,24,168,.06), transparent 60%),
+      radial-gradient(600px 360px at 12% -8%, rgba(34,126,246,.10), transparent 60%),
+      radial-gradient(560px 320px at 92% -4%, rgba(13,24,168,.08), transparent 60%),
       var(--bg);
   }
-  #home-inner{ max-width:760px; margin:0 auto; text-align:center; }
-  #home h1{
-    font-size:24px;
-    font-weight:700;
-    color:var(--zx-blue-dark);
-    margin:0 0 26px;
-    letter-spacing:.2px;
+  #home-inner{ max-width:880px; margin:0 auto; }
+
+  #home-hero{
+    display:flex;
+    align-items:center;
+    gap:22px;
+    margin-bottom:28px;
   }
   #home-orb{
-    width:110px;
-    height:110px;
-    margin:0 auto 30px;
-    border-radius:50%;
+    width:76px;
+    height:76px;
+    flex-shrink:0;
+    border-radius:22px;
     background:linear-gradient(135deg, var(--zx-blue-dark), var(--zx-blue));
     display:flex;
     align-items:center;
     justify-content:center;
     color:#fff;
     font-weight:800;
-    font-size:26px;
+    font-size:20px;
     letter-spacing:1px;
-    box-shadow:0 10px 34px rgba(13,24,168,.28), 0 0 0 8px rgba(34,126,246,.08);
+    box-shadow:0 10px 30px rgba(13,24,168,.30), 0 0 0 7px rgba(34,126,246,.09);
+  }
+  #home-greeting{
+    font-size:11.5px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    color:var(--zx-blue);
+    margin-bottom:4px;
+  }
+  #home h1{
+    font-size:26px;
+    font-weight:700;
+    color:var(--zx-blue-dark);
+    margin:0 0 6px;
+    letter-spacing:.2px;
   }
   #home-tagline{
-    font-size:14px;
-    color:var(--muted);
-    margin-bottom:24px;
-  }
-  #home-continue{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    background:linear-gradient(120deg, var(--zx-blue-dark), var(--zx-blue));
-    color:#fff;
-    border:none;
-    padding:11px 26px;
-    border-radius:999px;
     font-size:13.5px;
-    font-weight:600;
-    cursor:pointer;
-    margin-bottom:36px;
+    color:var(--muted);
   }
+
+  #home-search-wrap{
+    position:relative;
+    display:flex;
+    align-items:center;
+    margin-bottom:26px;
+  }
+  #home-search-icon{
+    position:absolute;
+    left:16px;
+    width:17px;
+    height:17px;
+    color:var(--muted);
+    pointer-events:none;
+  }
+  #home-search{
+    width:100%;
+    font-family:inherit;
+    font-size:13.5px;
+    color:var(--text);
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:999px;
+    padding:13px 18px 13px 44px;
+    outline:none;
+    transition:border-color .15s ease, box-shadow .15s ease;
+  }
+  #home-search::placeholder{ color:var(--muted); }
+  #home-search:focus{
+    border-color:var(--zx-blue);
+    box-shadow:0 0 0 4px rgba(34,126,246,.14);
+  }
+
+  #home-stats{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(160px,1fr));
+    gap:12px;
+    margin-bottom:32px;
+  }
+  .stat-card{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-left:3px solid var(--zx-blue);
+    border-radius:14px;
+    padding:14px 16px;
+  }
+  .stat-icon{
+    width:34px;
+    height:34px;
+    flex-shrink:0;
+    border-radius:10px;
+    background:rgba(34,126,246,.12);
+    color:var(--zx-blue-dark);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .stat-icon svg{ width:18px; height:18px; }
+  .stat-value{ font-size:19px; font-weight:800; color:var(--text); line-height:1.1; }
+  .stat-label{ font-size:11px; color:var(--muted); font-weight:600; }
+
   .home-section-title{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
     text-align:left;
     font-size:11.5px;
     font-weight:700;
@@ -517,32 +587,63 @@
     color:var(--muted);
     margin:0 0 12px;
   }
+  #quick-access-count{
+    font-weight:600;
+    color:var(--muted);
+    text-transform:none;
+    letter-spacing:0;
+    font-size:11px;
+  }
+
   #quick-access{
     display:grid;
-    grid-template-columns:repeat(auto-fill, minmax(120px,1fr));
+    grid-template-columns:repeat(auto-fill, minmax(130px,1fr));
     gap:12px;
-    margin-bottom:30px;
+    margin-bottom:32px;
+    text-align:left;
   }
   .quick-card{
     background:var(--panel);
     border:1px solid var(--border);
     border-radius:14px;
-    padding:16px 10px;
-    text-align:center;
+    padding:16px 14px;
     cursor:pointer;
-    transition:transform .15s ease, box-shadow .15s ease;
+    transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
   }
-  .quick-card:hover{ transform:translateY(-2px); box-shadow:0 8px 20px rgba(13,24,168,.10); }
-  .quick-card-icon{ width:26px; height:26px; margin:0 auto 8px; color:var(--zx-blue-dark); }
-  .quick-card-icon svg{ width:100%; height:100%; }
-  .quick-card-label{ font-size:12px; font-weight:600; color:var(--text); }
+  .quick-card:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 22px rgba(13,24,168,.12);
+    border-color:rgba(34,126,246,.4);
+  }
+  .quick-card-icon{
+    width:34px;
+    height:34px;
+    margin-bottom:12px;
+    border-radius:10px;
+    background:linear-gradient(135deg, rgba(13,24,168,.10), rgba(34,126,246,.14));
+    color:var(--zx-blue-dark);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .quick-card-icon svg{ width:18px; height:18px; }
+  .quick-card-label{ font-size:12.5px; font-weight:600; color:var(--text); line-height:1.3; }
 
   #anuncios{ display:flex; flex-direction:column; gap:10px; text-align:left; }
   .anuncio-card{
+    position:relative;
     background:var(--panel);
     border:1px solid var(--border);
     border-radius:14px;
-    padding:14px 16px;
+    padding:14px 16px 14px 20px;
+    overflow:hidden;
+  }
+  .anuncio-card::before{
+    content:"";
+    position:absolute;
+    left:0; top:0; bottom:0;
+    width:4px;
+    background:linear-gradient(180deg, var(--zx-blue), var(--zx-blue-dark));
   }
   .anuncio-titulo{ font-size:13.5px; font-weight:700; color:var(--text); margin-bottom:3px; }
   .anuncio-texto{ font-size:12.5px; color:var(--muted); margin-bottom:6px; }
@@ -622,12 +723,23 @@
 
     <div id="home">
       <div id="home-inner">
-        <h1>Bienvenido a Espacio Zubex</h1>
-        <div id="home-orb">ZX</div>
-        <div id="home-tagline">Tu plataforma central para la colaboración y el éxito corporativo.</div>
-        <button id="home-continue" onclick="document.getElementById('quick-access').scrollIntoView({behavior:'smooth'})">Continuar →</button>
+        <div id="home-hero">
+          <div id="home-orb">ZX</div>
+          <div>
+            <div id="home-greeting"></div>
+            <h1>Espacio Zubex</h1>
+            <div id="home-tagline">Tu plataforma central para la colaboración y el éxito corporativo.</div>
+          </div>
+        </div>
 
-        <div class="home-section-title">Accesos rápidos</div>
+        <div id="home-search-wrap">
+          <svg id="home-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          <input id="home-search" type="text" placeholder="Buscar una aplicación…" autocomplete="off" oninput="renderQuickAccess(this.value)">
+        </div>
+
+        <div id="home-stats"></div>
+
+        <div class="home-section-title"><span id="quick-access-title">Accesos rápidos</span><span id="quick-access-count"></span></div>
         <div id="quick-access"></div>
 
         <div class="home-section-title">Anuncios destacados</div>
@@ -750,6 +862,7 @@ async function cargarApps() {
     });
 
     renderQuickAccess();
+    renderHomeStats(data.areas);
     renderAnuncios(data.anuncios || []);
     renderRailIcons(data.areas);
   } catch (err) {
@@ -781,19 +894,69 @@ function crearAppItem(app, areaId) {
   return item;
 }
 
-function renderQuickAccess() {
+function renderQuickAccess(filtro) {
   const cont = document.getElementById("quick-access");
+  const titleEl = document.getElementById("quick-access-title");
+  const countEl = document.getElementById("quick-access-count");
+  const q = (filtro || "").trim().toLowerCase();
+
+  const fuente = q
+    ? appsPlanas.filter(app =>
+        app.nombre.toLowerCase().includes(q) ||
+        (app.descripcion || "").toLowerCase().includes(q))
+    : appsPlanas.slice(0, 6);
+
+  titleEl.textContent = q ? "Resultados de búsqueda" : "Accesos rápidos";
+  countEl.textContent = q ? fuente.length + (fuente.length === 1 ? " app" : " apps") : "";
+
   cont.innerHTML = "";
-  appsPlanas.slice(0, 6).forEach(app => {
+  fuente.forEach(app => {
     const card = document.createElement("div");
     card.className = "quick-card";
     card.innerHTML = "<div class=\"quick-card-icon\">" + iconFor(app._areaId) + "</div><div class=\"quick-card-label\">" + app.nombre + "</div>";
     card.onclick = () => abrirApp(app, null);
     cont.appendChild(card);
   });
-  if (appsPlanas.length === 0) {
-    cont.innerHTML = "<div class=\"empty-note\">Aún no hay aplicaciones activas</div>";
+  if (fuente.length === 0) {
+    cont.innerHTML = "<div class=\"empty-note\">" + (q ? "Sin resultados para \"" + filtro + "\"" : "Aún no hay aplicaciones activas") + "</div>";
   }
+}
+
+function contarEstados(areas) {
+  let activas = 0, desarrollo = 0;
+  function contar(apps) {
+    (apps || []).forEach(app => {
+      if (app.estado === "activa") activas++;
+      else if (app.estado === "en_desarrollo") desarrollo++;
+    });
+  }
+  areas.forEach(area => {
+    contar(area.apps);
+    (area.subareas || []).forEach(sub => contar(sub.apps));
+  });
+  return { activas, desarrollo, areas: areas.length };
+}
+
+function renderHomeStats(areas) {
+  const { activas, desarrollo, areas: totalAreas } = contarEstados(areas);
+  const cont = document.getElementById("home-stats");
+  const iconCheck = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 12l2 2 4-5"/><circle cx="12" cy="12" r="9"/></svg>';
+  const iconClock = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>';
+  const iconGrid = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>';
+  const stats = [
+    { icon: iconCheck, value: activas, label: "Apps activas" },
+    { icon: iconClock, value: desarrollo, label: "En desarrollo" },
+    { icon: iconGrid, value: totalAreas, label: "Áreas" },
+  ];
+  cont.innerHTML = stats.map(s =>
+    "<div class=\"stat-card\"><div class=\"stat-icon\">" + s.icon + "</div><div><div class=\"stat-value\">" + s.value + "</div><div class=\"stat-label\">" + s.label + "</div></div></div>"
+  ).join("");
+}
+
+function renderHomeGreeting() {
+  const h = new Date().getHours();
+  const saludo = h < 12 ? "Buenos días" : h < 19 ? "Buenas tardes" : "Buenas noches";
+  document.getElementById("home-greeting").textContent = saludo;
 }
 
 function renderAnuncios(anuncios) {
@@ -949,6 +1112,7 @@ function renderRailIcons(areas) {
   });
 }
 
+renderHomeGreeting();
 cargarApps();
 </script>
 <script>
