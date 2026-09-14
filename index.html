@@ -690,7 +690,6 @@ async function cargarApps() {
     data.areas.forEach(area => {
       const tieneApps = area.apps && area.apps.length > 0;
       const tieneSubareas = area.subareas && area.subareas.length > 0;
-      if (!tieneApps && !tieneSubareas) return;
 
       const bloque = document.createElement("div");
       bloque.className = "area-block";
@@ -738,10 +737,12 @@ async function cargarApps() {
           subBloque.appendChild(subBody);
           body.appendChild(subBloque);
         });
-      } else {
+      } else if (tieneApps) {
         area.apps.filter(appVisibleParaUsuario).forEach(app => {
           body.appendChild(crearAppItem(app, area.id));
         });
+      } else {
+        body.innerHTML = "<div class=\"empty-note\">Sin herramientas aún</div>";
       }
 
       bloque.appendChild(body);
@@ -932,9 +933,6 @@ function renderRailIcons(areas) {
   const cont = document.getElementById("rail-icons");
   cont.innerHTML = "";
   areas.forEach(area => {
-    const tieneApps = area.apps && area.apps.length > 0;
-    const tieneSubareas = area.subareas && area.subareas.length > 0;
-    if (!tieneApps && !tieneSubareas) return;
     const btn = document.createElement("div");
     btn.className = "rail-icon-btn";
     btn.title = area.nombre;
