@@ -41,6 +41,16 @@
           "rolesPermitidos": [
             "*"
           ]
+        },
+        {
+          "id": "zx-calidad-certificados-muestras",
+          "nombre": "Certificados de Calidad — Muestras",
+          "url": "https://ili-qbex-certificados-muestras.netlify.app/",
+          "estado": "activa",
+          "descripcion": "Emisión, consulta y reimpresión de certificados de calidad de muestras (PM, CEIPP, especificaciones)",
+          "rolesPermitidos": [
+            "*"
+          ]
         }
       ]
     },
