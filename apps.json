@@ -45,8 +45,8 @@
         {
           "id": "certificados-calidad-muestras",
           "nombre": "Certificados de Calidad — Muestras",
-          "url": null,
-          "estado": "en_desarrollo",
+          "url": "https://ili-qbex-certificados-muestras.netlify.app",
+          "estado": "activa",
           "descripcion": "",
           "rolesPermitidos": [
             "*"
