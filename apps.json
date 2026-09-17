@@ -43,11 +43,11 @@
           ]
         },
         {
-          "id": "zx-calidad-certificados-muestras",
+          "id": "certificados-calidad-muestras",
           "nombre": "Certificados de Calidad — Muestras",
-          "url": "https://ili-qbex-certificados-muestras.netlify.app/",
-          "estado": "activa",
-          "descripcion": "Emisión, consulta y reimpresión de certificados de calidad de muestras (PM, CEIPP, especificaciones)",
+          "url": null,
+          "estado": "en_desarrollo",
+          "descripcion": "",
           "rolesPermitidos": [
             "*"
           ]
@@ -94,10 +94,40 @@
       "apps": [
         {
           "id": "kaizenzx",
-          "nombre": "Kaizen",
+          "nombre": "Short Kaizen",
           "url": "https://gamabet26.github.io/KaizenZX/",
           "estado": "activa",
           "descripcion": "Gestión de proyectos Kaizen",
+          "rolesPermitidos": [
+            "*"
+          ]
+        },
+        {
+          "id": "eventos-kaizen",
+          "nombre": "Eventos Kaizen",
+          "url": null,
+          "estado": "en_desarrollo",
+          "descripcion": "",
+          "rolesPermitidos": [
+            "*"
+          ]
+        },
+        {
+          "id": "resultados-eq-kaizen",
+          "nombre": "Resultados Eq. Kaizen",
+          "url": null,
+          "estado": "en_desarrollo",
+          "descripcion": "",
+          "rolesPermitidos": [
+            "*"
+          ]
+        },
+        {
+          "id": "8s",
+          "nombre": "8's",
+          "url": null,
+          "estado": "en_desarrollo",
+          "descripcion": "",
           "rolesPermitidos": [
             "*"
           ]
@@ -137,12 +167,6 @@
           ]
         }
       ]
-    },
-    {
-      "id": "comercial",
-      "nombre": "Comercial",
-      "icono": "💼",
-      "apps": []
     },
     {
       "id": "planeacion",
@@ -197,7 +221,28 @@
           "id": "erp",
           "nombre": "ERP",
           "icono": "🧾",
-          "apps": []
+          "apps": [
+            {
+              "id": "zuappix",
+              "nombre": "Zuappix",
+              "url": null,
+              "estado": "en_desarrollo",
+              "descripcion": "",
+              "rolesPermitidos": [
+                "*"
+              ]
+            },
+            {
+              "id": "opex",
+              "nombre": "Opex",
+              "url": null,
+              "estado": "en_desarrollo",
+              "descripcion": "",
+              "rolesPermitidos": [
+                "*"
+              ]
+            }
+          ]
         },
         {
           "id": "logistica",
