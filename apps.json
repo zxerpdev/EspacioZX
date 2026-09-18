@@ -51,6 +51,16 @@
           "rolesPermitidos": [
             "*"
           ]
+        },
+        {
+          "id": "medicion-atributos",
+          "nombre": "Medición de Atributos",
+          "url": "https://zxerpdev.github.io/medicion-atributos-/",
+          "estado": "activa",
+          "descripcion": "ASC-F-01 · Auditoría de Atributos y Variables de Extrusión",
+          "rolesPermitidos": [
+            "*"
+          ]
         }
       ]
     },
