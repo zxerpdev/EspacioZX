@@ -8,7 +8,7 @@
         {
           "id": "ztela-zx",
           "nombre": "Ztela ZX",
-          "url": null,
+          "url": "http://192.168.43.170/",
           "estado": "en_desarrollo",
           "descripcion": "Registro de bobinas (backend pendiente con Chuy)",
           "rolesPermitidos": [
