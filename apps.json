@@ -10,7 +10,7 @@
           "nombre": "Ztela ZX",
           "url": "http://192.168.43.170/",
           "estado": "activa",
-          "descripcion": "Registro de bobinas",
+          "descripcion": "Registro de bobinas (backend pendiente con Chuy)",
           "rolesPermitidos": [
             "*"
           ]
@@ -54,10 +54,20 @@
         },
         {
           "id": "medicion-atributos",
-          "nombre": "Medición de Atributos",
+          "nombre": "Medición de Extruder",
           "url": "https://zxerpdev.github.io/medicion-atributos-/",
           "estado": "activa",
-          "descripcion": "ASC-F-01 · Auditoría de Atributos y Variables de Extrusión",
+          "descripcion": "Auditoría de Atributos y Variables de Extrusión",
+          "rolesPermitidos": [
+            "*"
+          ]
+        },
+        {
+          "id": "monitoreo-corrugado",
+          "nombre": "Medicion de Corrugado",
+          "url": "https://zx-erp.github.io/Corrugado/",
+          "estado": "activa",
+          "descripcion": "Monitoreo y Control de Corrugado",
           "rolesPermitidos": [
             "*"
           ]
