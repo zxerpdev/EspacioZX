@@ -501,7 +501,7 @@
       radial-gradient(500px 300px at 90% 0%, rgba(13,24,168,.06), transparent 60%),
       color-mix(in srgb, var(--bg) 82%, transparent);
   }
-  #home-inner{ position:relative; z-index:1; max-width:760px; margin:0 auto; text-align:center; }
+  #home-inner{ position:relative; z-index:1; max-width:1200px; margin:0 auto; text-align:center; }
   #home h1{
     font-size:24px;
     font-weight:700;
@@ -539,70 +539,77 @@
   }
   #quick-access{
     display:grid;
-    grid-template-columns:repeat(auto-fill, minmax(120px,1fr));
-    gap:12px;
-    margin-bottom:30px;
+    grid-template-columns:repeat(auto-fill, minmax(140px,1fr));
+    gap:14px;
+    margin-bottom:34px;
   }
   .quick-card{
     background:var(--panel);
     border:1px solid var(--border);
     border-radius:14px;
-    padding:16px 10px;
+    padding:18px 12px;
     text-align:center;
     cursor:pointer;
     transition:transform .15s ease, box-shadow .15s ease;
   }
   .quick-card:hover{ transform:translateY(-2px); box-shadow:0 8px 20px rgba(13,24,168,.10); }
-  .quick-card-icon{ width:26px; height:26px; margin:0 auto 8px; color:var(--zx-blue-dark); }
+  .quick-card-icon{ width:30px; height:30px; margin:0 auto 10px; color:var(--zx-blue-dark); }
   .quick-card-icon svg{ width:100%; height:100%; }
-  .quick-card-label{ font-size:12px; font-weight:600; color:var(--text); }
+  .quick-card-label{ font-size:13.5px; font-weight:600; color:var(--text); }
 
-  #anuncios{ display:flex; flex-direction:column; gap:10px; text-align:left; }
+  #anuncios{
+    display:grid; grid-template-columns:repeat(auto-fill, minmax(300px,1fr));
+    gap:14px; text-align:left; margin-bottom:34px;
+  }
   .anuncio-card{
     background:var(--panel);
     border:1px solid var(--border);
     border-radius:14px;
-    padding:14px 16px;
+    padding:18px 20px;
   }
-  .anuncio-titulo{ font-size:13.5px; font-weight:700; color:var(--text); margin-bottom:3px; }
-  .anuncio-texto{ font-size:12.5px; color:var(--muted); margin-bottom:6px; }
-  .anuncio-fecha{ font-size:11px; color:var(--muted); }
+  .anuncio-titulo{ font-size:16px; font-weight:700; color:var(--text); margin-bottom:5px; }
+  .anuncio-texto{ font-size:14px; color:var(--muted); margin-bottom:8px; line-height:1.4; }
+  .anuncio-fecha{ font-size:12px; color:var(--muted); }
 
   /* ---------- AVISOS RH: cumpleaños / aniversarios / eventos ---------- */
   #avisos-cumple, #avisos-aniversario, #avisos-eventos{
-    display:flex; flex-direction:column; gap:10px; text-align:left; margin-bottom:30px;
+    display:grid; grid-template-columns:repeat(auto-fill, minmax(320px,1fr));
+    gap:14px; text-align:left; margin-bottom:34px;
   }
   .aviso-card{
     background:var(--panel);
     border:1px solid var(--border);
-    border-left:4px solid var(--zx-blue);
-    border-radius:12px;
-    padding:12px 16px;
-    display:flex; align-items:center; gap:12px;
+    border-left:5px solid var(--zx-blue);
+    border-radius:14px;
+    padding:16px 20px;
+    display:flex; align-items:center; gap:16px;
   }
   .aviso-card.pendiente{ border-left-color:#e0a72a; }
-  .aviso-icon{ font-size:22px; flex-shrink:0; }
+  .aviso-icon{ font-size:32px; flex-shrink:0; }
   .aviso-foto{
-    width:44px; height:44px; border-radius:50%; object-fit:cover;
+    width:64px; height:64px; border-radius:50%; object-fit:cover;
     flex-shrink:0; border:1px solid var(--border); background:#eef1fa;
   }
-  .aviso-foto.rect{ width:78px; height:52px; border-radius:8px; }
-  .aviso-titulo{ font-size:13.5px; font-weight:700; color:var(--text); }
-  .aviso-texto{ font-size:12.5px; color:var(--muted); }
-  .avisos-empty{ font-size:12.5px; color:var(--muted); font-style:italic; }
+  .aviso-foto.rect{ width:110px; height:74px; border-radius:10px; }
+  .aviso-titulo{ font-size:16px; font-weight:700; color:var(--text); }
+  .aviso-texto{ font-size:14px; color:var(--muted); margin-top:2px; }
+  .avisos-empty{ font-size:13.5px; color:var(--muted); font-style:italic; }
 
-  #avisos-videos{ display:flex; flex-direction:column; gap:14px; text-align:left; margin-bottom:30px; }
-  .video-card{
-    background:var(--panel); border:1px solid var(--border); border-radius:12px;
-    padding:12px 14px;
+  #avisos-videos{
+    display:grid; grid-template-columns:repeat(auto-fill, minmax(380px,1fr));
+    gap:16px; text-align:left; margin-bottom:34px;
   }
-  .video-card-titulo{ font-size:13.5px; font-weight:700; color:var(--text); margin-bottom:2px; }
-  .video-card-texto{ font-size:12px; color:var(--muted); margin-bottom:8px; }
+  .video-card{
+    background:var(--panel); border:1px solid var(--border); border-radius:14px;
+    padding:16px 18px;
+  }
+  .video-card-titulo{ font-size:16px; font-weight:700; color:var(--text); margin-bottom:4px; }
+  .video-card-texto{ font-size:13.5px; color:var(--muted); margin-bottom:10px; }
   .video-card video, .video-card iframe{
-    width:100%; max-height:220px; border-radius:8px; border:none; display:block;
+    width:100%; max-height:240px; border-radius:8px; border:none; display:block;
     background:#000;
   }
-  .video-card a.video-link{ font-size:13px; color:var(--zx-blue); font-weight:600; }
+  .video-card a.video-link{ font-size:14px; color:var(--zx-blue); font-weight:600; }
 
   /* ---------- LOADING / EN CONSTRUCCIÓN ---------- */
   #loading-overlay, #construccion-view{
