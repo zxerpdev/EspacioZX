@@ -10,7 +10,7 @@
           "nombre": "Ztela ZX",
           "url": "http://192.168.43.170/",
           "estado": "activa",
-          "descripcion": "Registro de bobinas",
+          "descripcion": "Registro de bobinas (backend pendiente con Chuy)",
           "rolesPermitidos": [
             "*"
           ]
@@ -54,20 +54,20 @@
         },
         {
           "id": "medicion-atributos",
-          "nombre": "Medición de Extruder",
+          "nombre": "Medición de Atributos",
           "url": "https://zxerpdev.github.io/medicion-atributos-/",
           "estado": "activa",
-          "descripcion": "Auditoría de Atributos y Variables de Extrusión",
+          "descripcion": "ASC-F-01 · Auditoría de Atributos y Variables de Extrusión",
           "rolesPermitidos": [
             "*"
           ]
         },
         {
           "id": "monitoreo-corrugado",
-          "nombre": "Medicion de Corrugado",
+          "nombre": "Monitoreo y Control de Corrugado",
           "url": "https://zx-erp.github.io/Corrugado/",
           "estado": "activa",
-          "descripcion": "Monitoreo y Control de Corrugado",
+          "descripcion": "ASC-F-50 · Monitoreo y Control de Corrugado",
           "rolesPermitidos": [
             "*"
           ]
@@ -101,6 +101,16 @@
           "url": "https://zxerpdev.github.io/Expediente-Medico-/",
           "estado": "activa",
           "descripcion": "Medico ZX — expedientes médicos del personal",
+          "rolesPermitidos": [
+            "*"
+          ]
+        },
+        {
+          "id": "avisos-rh",
+          "nombre": "Avisos",
+          "url": "https://zxerpdev.github.io/Avisos-RH/",
+          "estado": "en_desarrollo",
+          "descripcion": "publicar",
           "rolesPermitidos": [
             "*"
           ]
