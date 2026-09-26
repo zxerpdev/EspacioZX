@@ -568,6 +568,42 @@
   .anuncio-texto{ font-size:12.5px; color:var(--muted); margin-bottom:6px; }
   .anuncio-fecha{ font-size:11px; color:var(--muted); }
 
+  /* ---------- AVISOS RH: cumpleaños / aniversarios / eventos ---------- */
+  #avisos-cumple, #avisos-aniversario, #avisos-eventos{
+    display:flex; flex-direction:column; gap:10px; text-align:left; margin-bottom:30px;
+  }
+  .aviso-card{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-left:4px solid var(--zx-blue);
+    border-radius:12px;
+    padding:12px 16px;
+    display:flex; align-items:center; gap:12px;
+  }
+  .aviso-card.pendiente{ border-left-color:#e0a72a; }
+  .aviso-icon{ font-size:22px; flex-shrink:0; }
+  .aviso-foto{
+    width:44px; height:44px; border-radius:50%; object-fit:cover;
+    flex-shrink:0; border:1px solid var(--border); background:#eef1fa;
+  }
+  .aviso-foto.rect{ width:78px; height:52px; border-radius:8px; }
+  .aviso-titulo{ font-size:13.5px; font-weight:700; color:var(--text); }
+  .aviso-texto{ font-size:12.5px; color:var(--muted); }
+  .avisos-empty{ font-size:12.5px; color:var(--muted); font-style:italic; }
+
+  #avisos-videos{ display:flex; flex-direction:column; gap:14px; text-align:left; margin-bottom:30px; }
+  .video-card{
+    background:var(--panel); border:1px solid var(--border); border-radius:12px;
+    padding:12px 14px;
+  }
+  .video-card-titulo{ font-size:13.5px; font-weight:700; color:var(--text); margin-bottom:2px; }
+  .video-card-texto{ font-size:12px; color:var(--muted); margin-bottom:8px; }
+  .video-card video, .video-card iframe{
+    width:100%; max-height:220px; border-radius:8px; border:none; display:block;
+    background:#000;
+  }
+  .video-card a.video-link{ font-size:13px; color:var(--zx-blue); font-weight:600; }
+
   /* ---------- LOADING / EN CONSTRUCCIÓN ---------- */
   #loading-overlay, #construccion-view{
     flex:1;
@@ -661,6 +697,18 @@
 
         <div class="home-section-title">Anuncios destacados</div>
         <div id="anuncios"></div>
+
+        <div class="home-section-title">🎂 Cumpleaños</div>
+        <div id="avisos-cumple"></div>
+
+        <div class="home-section-title">🎉 Aniversarios</div>
+        <div id="avisos-aniversario"></div>
+
+        <div class="home-section-title">📅 Eventos de la empresa</div>
+        <div id="avisos-eventos"></div>
+
+        <div class="home-section-title">🎬 Videos</div>
+        <div id="avisos-videos"></div>
       </div>
     </div>
 
@@ -1967,6 +2015,199 @@ window.disableSplashCursor = initSplashCursor({
   SHADING: true
 });
 </script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-database-compat.js"></script>
+<script>
+// ================================================================
+// AVISOS RH — lectura de cumpleaños, aniversarios y eventos
+// Usa el MISMO proyecto de Firebase que la app "Avisos RH" (donde
+// RH captura los datos). Reemplaza estas credenciales con las reales.
+// ================================================================
+const avisosFirebaseConfig = {
+  apiKey: "TU_API_KEY",
+  authDomain: "TU_PROYECTO.firebaseapp.com",
+  databaseURL: "https://TU_PROYECTO-default-rtdb.firebaseio.com",
+  projectId: "TU_PROYECTO",
+  storageBucket: "TU_PROYECTO.appspot.com",
+  messagingSenderId: "000000000000",
+  appId: "TU_APP_ID"
+};
+
+let avisosDb = null;
+try {
+  const avisosApp = firebase.initializeApp(avisosFirebaseConfig, "avisos");
+  avisosDb = avisosApp.database();
+} catch (e) {
+  console.warn("Avisos RH: Firebase no configurado todavía.", e);
+}
+
+// --- utilidades de fecha ---
+function soloFecha(d) {
+  return new Date(d.getFullYear(), d.getMonth(), d.getDate());
+}
+function sumarDias(d, n) {
+  const r = new Date(d);
+  r.setDate(r.getDate() + n);
+  return r;
+}
+function mismoDia(a, b) {
+  return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
+}
+
+// Dada una fecha "mes/día" (repetida cada año) devuelve, comparado con hoy,
+// si corresponde mostrar el aviso hoy y con qué estado:
+//  - 'hoy'       -> el día real cae entre semana (o es hoy exactamente)
+//  - 'porCumplir'-> el día real cae en fin de semana y hoy es el viernes anterior
+//  - 'cumplido'  -> el día real cayó en fin de semana y hoy es el lunes siguiente
+//  - null        -> no corresponde mostrar nada hoy
+function estadoDeFecha(mesDiaISO, hoy) {
+  if (!mesDiaISO) return null;
+  const [, mesStr, diaStr] = mesDiaISO.split('-');
+  const mes = parseInt(mesStr, 10) - 1;
+  const dia = parseInt(diaStr, 10);
+  const fechaEsteAno = soloFecha(new Date(hoy.getFullYear(), mes, dia));
+  const diaSemana = fechaEsteAno.getDay(); // 0=domingo, 6=sábado
+
+  if (diaSemana === 6) { // sábado
+    const viernes = sumarDias(fechaEsteAno, -1);
+    const lunes = sumarDias(fechaEsteAno, 2);
+    if (mismoDia(hoy, viernes)) return 'porCumplir';
+    if (mismoDia(hoy, lunes)) return 'cumplido';
+    return null;
+  }
+  if (diaSemana === 0) { // domingo
+    const viernes = sumarDias(fechaEsteAno, -2);
+    const lunes = sumarDias(fechaEsteAno, 1);
+    if (mismoDia(hoy, viernes)) return 'porCumplir';
+    if (mismoDia(hoy, lunes)) return 'cumplido';
+    return null;
+  }
+  // entre semana: solo se muestra el día exacto
+  return mismoDia(hoy, fechaEsteAno) ? 'hoy' : null;
+}
+
+function renderAvisoLista(contenedorId, items, mensajeVacio) {
+  const el = document.getElementById(contenedorId);
+  if (!el) return;
+  if (!items.length) {
+    el.innerHTML = `<div class="avisos-empty">${mensajeVacio}</div>`;
+    return;
+  }
+  el.innerHTML = items.map(it => `
+    <div class="aviso-card ${it.pendiente ? 'pendiente' : ''}">
+      ${it.foto ? `<img class="aviso-foto${it.fotoRect ? ' rect' : ''}" src="${it.foto}">` : `<div class="aviso-icon">${it.icono}</div>`}
+      <div>
+        <div class="aviso-titulo">${it.titulo}</div>
+        <div class="aviso-texto">${it.texto}</div>
+      </div>
+    </div>`).join('');
+}
+
+// Convierte enlaces comunes (YouTube, Drive) a su versión embebible.
+// Si no reconoce el formato, deja un enlace simple para abrir en pestaña nueva.
+function embedVideoUrl(url) {
+  const yt = url.match(/(?:youtu\.be\/|youtube\.com\/watch\?v=|youtube\.com\/embed\/)([\w-]{6,})/);
+  if (yt) return { tipo: 'iframe', src: `https://www.youtube.com/embed/${yt[1]}` };
+  const drive = url.match(/drive\.google\.com\/file\/d\/([\w-]+)/);
+  if (drive) return { tipo: 'iframe', src: `https://drive.google.com/file/d/${drive[1]}/preview` };
+  return { tipo: 'enlace', src: url };
+}
+
+function renderVideosLista(items, mensajeVacio) {
+  const el = document.getElementById('avisos-videos');
+  if (!el) return;
+  if (!items.length) {
+    el.innerHTML = `<div class="avisos-empty">${mensajeVacio}</div>`;
+    return;
+  }
+  el.innerHTML = items.map(v => {
+    let cuerpo;
+    if (v.tipo === 'archivo') {
+      cuerpo = `<video controls src="${v.url}"></video>`;
+    } else {
+      const emb = embedVideoUrl(v.url || '');
+      cuerpo = emb.tipo === 'iframe'
+        ? `<iframe src="${emb.src}" allowfullscreen></iframe>`
+        : `<a class="video-link" href="${emb.src}" target="_blank" rel="noopener">Ver video ↗</a>`;
+    }
+    return `<div class="video-card">
+      <div class="video-card-titulo">${v.titulo}</div>
+      ${v.descripcion ? `<div class="video-card-texto">${v.descripcion}</div>` : ''}
+      ${cuerpo}
+    </div>`;
+  }).join('');
+}
+
+function cargarAvisos() {
+  if (!avisosDb) {
+    renderAvisoLista('avisos-cumple', [], 'Sin conectar (falta configurar Firebase).');
+    renderAvisoLista('avisos-aniversario', [], 'Sin conectar (falta configurar Firebase).');
+    renderAvisoLista('avisos-eventos', [], 'Sin conectar (falta configurar Firebase).');
+    renderVideosLista([], 'Sin conectar (falta configurar Firebase).');
+    return;
+  }
+  const hoy = soloFecha(new Date());
+
+  avisosDb.ref('personal').on('value', snap => {
+    const personal = snap.val() || {};
+    const cumples = [];
+    const aniversarios = [];
+
+    Object.values(personal).forEach(p => {
+      if (p.fechaNacimiento) {
+        const estado = estadoDeFecha(p.fechaNacimiento, hoy);
+        if (estado === 'hoy') {
+          cumples.push({ icono: '🎂', foto: p.foto, titulo: p.nombre, texto: '¡Hoy cumple años!', pendiente: false });
+        } else if (estado === 'porCumplir') {
+          cumples.push({ icono: '🎂', foto: p.foto, titulo: p.nombre, texto: 'Por cumplir años este fin de semana', pendiente: true });
+        } else if (estado === 'cumplido') {
+          cumples.push({ icono: '🎂', foto: p.foto, titulo: p.nombre, texto: 'Cumplió años el fin de semana', pendiente: false });
+        }
+      }
+      if (p.fechaIngreso) {
+        const estado = estadoDeFecha(p.fechaIngreso, hoy);
+        if (estado) {
+          const anos = hoy.getFullYear() - parseInt(p.fechaIngreso.split('-')[0], 10);
+          if (anos > 0) {
+            if (estado === 'hoy') {
+              aniversarios.push({ icono: '🎉', foto: p.foto, titulo: p.nombre, texto: `¡Hoy cumple ${anos} ${anos===1?'año':'años'} en Zubex!`, pendiente: false });
+            } else if (estado === 'porCumplir') {
+              aniversarios.push({ icono: '🎉', foto: p.foto, titulo: p.nombre, texto: `Por cumplir ${anos} ${anos===1?'año':'años'} este fin de semana`, pendiente: true });
+            } else if (estado === 'cumplido') {
+              aniversarios.push({ icono: '🎉', foto: p.foto, titulo: p.nombre, texto: `Cumplió ${anos} ${anos===1?'año':'años'} el fin de semana`, pendiente: false });
+            }
+          }
+        }
+      }
+    });
+
+    renderAvisoLista('avisos-cumple', cumples, 'No hay cumpleaños hoy.');
+    renderAvisoLista('avisos-aniversario', aniversarios, 'No hay aniversarios hoy.');
+  });
+
+  avisosDb.ref('eventos').on('value', snap => {
+    const eventos = snap.val() || {};
+    const proximos = Object.values(eventos)
+      .filter(e => e.fecha && e.fecha >= hoy.toISOString().slice(0, 10))
+      .sort((a, b) => a.fecha.localeCompare(b.fecha))
+      .slice(0, 6)
+      .map(e => {
+        const [y, m, d] = e.fecha.split('-');
+        return { icono: '📅', foto: e.foto, fotoRect: true, titulo: e.titulo, texto: `${d}/${m}/${y}${e.descripcion ? ' — ' + e.descripcion : ''}`, pendiente: false };
+      });
+    renderAvisoLista('avisos-eventos', proximos, 'No hay eventos próximos.');
+  });
+
+  avisosDb.ref('videos').on('value', snap => {
+    const videos = snap.val() || {};
+    const lista = Object.values(videos);
+    renderVideosLista(lista, 'No hay videos por ahora.');
+  });
+}
+
+cargarAvisos();
+</script>
+
 <script type="module">
 // ---------------------------------------------------------------
 // Threads (adaptado de react-bits, sin React) — fondo de hebras
