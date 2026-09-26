@@ -2068,22 +2068,25 @@ function estadoDeFecha(mesDiaISO, hoy) {
   const fechaEsteAno = soloFecha(new Date(hoy.getFullYear(), mes, dia));
   const diaSemana = fechaEsteAno.getDay(); // 0=domingo, 6=sábado
 
+  // El día real SIEMPRE se muestra (para operadores, que trabajan también sáb/dom).
+  if (mismoDia(hoy, fechaEsteAno)) return 'hoy';
+
+  // Si además cae en fin de semana, se avisa también el viernes antes
+  // ("por cumplir") y el lunes después ("cumplido"), para administrativos
+  // que no laboran sábado/domingo.
   if (diaSemana === 6) { // sábado
     const viernes = sumarDias(fechaEsteAno, -1);
     const lunes = sumarDias(fechaEsteAno, 2);
     if (mismoDia(hoy, viernes)) return 'porCumplir';
     if (mismoDia(hoy, lunes)) return 'cumplido';
-    return null;
   }
   if (diaSemana === 0) { // domingo
     const viernes = sumarDias(fechaEsteAno, -2);
     const lunes = sumarDias(fechaEsteAno, 1);
     if (mismoDia(hoy, viernes)) return 'porCumplir';
     if (mismoDia(hoy, lunes)) return 'cumplido';
-    return null;
   }
-  // entre semana: solo se muestra el día exacto
-  return mismoDia(hoy, fechaEsteAno) ? 'hoy' : null;
+  return null;
 }
 
 function renderAvisoLista(contenedorId, items, mensajeVacio) {
