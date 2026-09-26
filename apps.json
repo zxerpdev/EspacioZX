@@ -109,8 +109,8 @@
           "id": "avisos-rh",
           "nombre": "Avisos",
           "url": "https://zxerpdev.github.io/Avisos-RH/",
-          "estado": "en_desarrollo",
-          "descripcion": "publicar",
+          "estado": "activa",
+          "descripcion": "Captura de personal (cumpleaños/aniversarios) y eventos de la empresa, se reflejan en la pantalla de Inicio",
           "rolesPermitidos": [
             "*"
           ]
