@@ -747,34 +747,6 @@
   .aviso-texto{ font-size:14px; color:var(--muted); margin-top:2px; overflow-wrap:anywhere; }
   .avisos-empty{ grid-column:1 / -1; font-size:13.5px; color:var(--muted); font-style:italic; }
 
-  /* Organigrama incrustado (vista pública de solo lectura de Avisos RH).
-     Una capa transparente evita que la rueda del mouse quede "atrapada" en el
-     organigrama (ahí hace zoom) mientras haces scroll en Inicio: se activa con clic. */
-  #org-embed{
-    position:relative; height:560px; border:1px solid var(--border); border-radius:16px;
-    overflow:hidden; background:var(--panel); margin-bottom:8px;
-    box-shadow:0 10px 30px rgba(13,24,168,.08); text-align:left;
-  }
-  #org-embed iframe{ width:100%; height:100%; border:0; display:block; background:#fff; }
-  #org-embed-cap{
-    position:absolute; inset:0; border:0; cursor:pointer; padding:0 0 18px;
-    display:flex; align-items:flex-end; justify-content:center;
-    background:linear-gradient(180deg, rgba(255,255,255,0) 65%, rgba(13,24,168,.10));
-  }
-  .org-embed-pill{
-    background:rgba(13,24,168,.9); color:#fff; font:600 12.5px/1 inherit;
-    padding:9px 16px; border-radius:999px; box-shadow:0 6px 18px rgba(13,24,168,.35);
-  }
-  #org-embed-cap:hover .org-embed-pill{ background:var(--zx-blue); }
-  #org-embed.activo #org-embed-cap{ display:none; }
-  #org-embed-pie{ text-align:right; margin-bottom:34px; }
-  #org-embed-pie button{
-    border:1px solid var(--border); background:var(--panel); color:var(--zx-blue-dark);
-    border-radius:999px; padding:7px 14px; font:600 12.5px/1 inherit; cursor:pointer;
-  }
-  #org-embed-pie button:hover{ background:rgba(34,126,246,.08); }
-  @media (max-width:680px){ #org-embed{ height:440px; } }
-
   /* Videos: franja oscura tipo "cine" — contraste real contra el resto de
      la página, que es clara. */
   #avisos-videos{
@@ -919,15 +891,6 @@
 
         <div class="home-section-title"><span class="ti">📅</span> Eventos de la empresa</div>
         <div id="avisos-eventos"></div>
-
-        <div class="home-section-title"><span class="ti">🧭</span> Organigrama</div>
-        <div id="org-embed">
-          <iframe id="org-embed-frame" title="Organigrama Zubex" allow="fullscreen"></iframe>
-          <button type="button" id="org-embed-cap" aria-label="Explorar el organigrama">
-            <span class="org-embed-pill">Clic para explorar</span>
-          </button>
-        </div>
-        <div id="org-embed-pie"><button type="button" onclick="abrirOrganigrama()">⛶ Abrir en pantalla completa</button></div>
 
         <div class="home-section-title"><span class="ti">🎬</span> Videos</div>
         <div id="avisos-videos"></div>
@@ -3355,9 +3318,13 @@ window.disableThreadsBackground = initThreadsBackground(document.getElementById(
   var BASE = 12, OFF = 14, CAP = 5, GAP = 24, K = 0.04, MIN = 0.8;
   // Cada sub-columna (Hoy / Fin de semana, dentro de cumpleaños y de
   // aniversarios) apila sus propias tarjetas de forma independiente.
-  var conts = Array.prototype.slice.call(
-    document.querySelectorAll('#avisos-cumple .avisos-col, #avisos-aniversario .avisos-col')
-  );
+  // OJO: las columnas se crean cuando llegan los datos de Firebase, así que
+  // se buscan cada vez (no una sola vez al cargar la página).
+  function columnas() {
+    return Array.prototype.slice.call(
+      document.querySelectorAll('#avisos-cumple .avisos-col, #avisos-aniversario .avisos-col')
+    );
+  }
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   var pend = false;
 
@@ -3367,7 +3334,7 @@ window.disableThreadsBackground = initThreadsBackground(document.getElementById(
     pend = false;
     if (reduce) return;
     var hr = home.getBoundingClientRect();
-    conts.forEach(function(c){
+    columnas().forEach(function(c){
       if (!c) return;
       var items = c.querySelectorAll('.stack-item');
       var n = items.length;
@@ -3562,7 +3529,8 @@ window.disableThreadsBackground = initThreadsBackground(document.getElementById(
     var it = data && data[parseInt(card.getAttribute('data-idx'), 10)];
     if (it) abrir(it, card);
   }
-  conts.forEach(function(c){
+  ['avisos-cumple', 'avisos-aniversario'].forEach(function(id){
+    var c = document.getElementById(id);
     if (!c) return;
     c.addEventListener('click', manejar);
     c.addEventListener('keydown', function(e){
@@ -3571,29 +3539,6 @@ window.disableThreadsBackground = initThreadsBackground(document.getElementById(
       }
     });
   });
-})();
-</script>
-<script>
-// Organigrama incrustado en Inicio: carga diferida (solo cuando está por verse,
-// para no descargar los ~340 registros en cada visita a Inicio) y capa de clic.
-(function () {
-  var home = document.getElementById('home');
-  var box = document.getElementById('org-embed');
-  var fr = document.getElementById('org-embed-frame');
-  var cap = document.getElementById('org-embed-cap');
-  if (!home || !box || !fr || !cap) return;
-  function cargar() {
-    if (fr.getAttribute('src')) return;
-    fr.src = (typeof urlOrganigrama === 'function') ? urlOrganigrama() : 'https://zxerpdev.github.io/Avisos-RH/?vista=organigrama';
-  }
-  if ('IntersectionObserver' in window) {
-    var io = new IntersectionObserver(function (en) {
-      if (en.some(function (e) { return e.isIntersecting; })) { cargar(); io.disconnect(); }
-    }, { root: home, rootMargin: '300px 0px' });
-    io.observe(box);
-  } else { cargar(); }
-  cap.addEventListener('click', function () { box.classList.add('activo'); });
-  box.addEventListener('mouseleave', function () { box.classList.remove('activo'); });
 })();
 </script>
 </body>
