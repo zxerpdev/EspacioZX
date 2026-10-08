@@ -531,6 +531,73 @@
     color:var(--muted);
     margin:0 0 12px;
   }
+  /* ---------- Cuenta regresiva (sin recuadro, centrada en Inicio) ---------- */
+  #cuenta-regresiva{
+    position:relative; margin:0 auto 32px; text-align:center; color:var(--text);
+    display:flex; flex-direction:column; align-items:center; gap:14px;
+  }
+  #cuenta-regresiva[hidden]{ display:none; }
+  .cr-info{ display:flex; flex-direction:column; align-items:center; gap:4px; min-width:0; }
+  .cr-pre{
+    display:flex; align-items:center; justify-content:center; gap:8px;
+    font-size:11px; letter-spacing:.1em; font-weight:700; text-transform:uppercase; color:var(--muted);
+  }
+  .cr-icono{ width:22px; height:22px; flex-shrink:0; color:var(--zx-blue-dark); }
+  [data-theme="dark"] .cr-icono{ color:var(--zx-blue); }
+  .cr-icono svg{ width:100%; height:100%; display:block; stroke-width:6px; }
+  .cr-titulo{ margin:0 0 4px; font-size:clamp(18px,2.2vw,24px); font-weight:700; line-height:1.15; color:var(--text); }
+  .cr-fechas{
+    display:inline-block; font-size:11.5px; font-weight:600; white-space:nowrap;
+    color:var(--zx-blue-dark); background:rgba(34,126,246,.10);
+    border-radius:999px; padding:3px 11px;
+  }
+  [data-theme="dark"] .cr-fechas{ color:var(--zx-blue); }
+  .cr-display{ display:flex; align-items:flex-start; justify-content:center; gap:12px; }
+  .cr-dias{ display:flex; flex-direction:column; align-items:center; }
+  .cr-led{
+    background:var(--panel); border:1px solid rgba(34,126,246,.24);
+    border-radius:12px; text-align:center; box-shadow:0 6px 16px rgba(13,24,168,.08);
+  }
+  .cr-dias .cr-led{ padding:7px 16px; min-width:86px; }
+  .cr-num{
+    font-weight:800; line-height:1; letter-spacing:.01em; color:var(--zx-blue-dark);
+    font-variant-numeric:tabular-nums;
+  }
+  [data-theme="dark"] .cr-num{ color:var(--zx-blue); }
+  .cr-dias .cr-num{ font-size:clamp(36px,4.4vw,52px); }
+  /* Nombres de las unidades (DÍAS / HRS / MIN / SEG): etiquetas con el degradado azul de Zubex */
+  .cr-lbl, .cr-tile .cr-u{
+    margin-top:8px; padding:3px 11px; border-radius:999px;
+    font-size:11px; font-weight:800; letter-spacing:.12em; text-align:center; color:#fff;
+    background:linear-gradient(120deg, var(--zx-blue-dark), var(--zx-blue));
+    box-shadow:0 4px 10px rgba(34,126,246,.30);
+  }
+  .cr-reloj{ display:flex; flex-direction:row; gap:12px; }
+  .cr-tile{ display:flex; flex-direction:column; align-items:center; }
+  .cr-tile .cr-led{ padding:9px 11px; min-width:62px; }
+  .cr-tile .cr-num{ font-size:clamp(22px,2.8vw,32px); }
+  .cr-curso{ align-items:center; }
+  .cr-curso .cr-led{ padding:0; }
+  .cr-curso .cr-num{ font-size:clamp(22px,2.8vw,32px); padding:10px 24px; white-space:nowrap; }
+  .cr-curso-txt{
+    margin-top:8px; font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+    text-align:center; color:var(--muted); display:flex; align-items:center; justify-content:center; gap:7px;
+  }
+  .cr-curso-txt::before{
+    content:""; width:8px; height:8px; border-radius:50%; background:#22b573;
+    box-shadow:0 0 0 0 rgba(34,181,115,.55); animation:crPulso 1.8s ease-out infinite;
+  }
+  @keyframes crPulso{ 0%{box-shadow:0 0 0 0 rgba(34,181,115,.55)} 70%,100%{box-shadow:0 0 0 8px rgba(34,181,115,0)} }
+  @media (prefers-reduced-motion:reduce){ .cr-curso-txt::before{ animation:none; } }
+  @media (max-width:430px){
+    .cr-display{ gap:7px; }
+    .cr-reloj{ gap:7px; }
+    .cr-pre{ letter-spacing:.05em; font-size:10px; }
+    .cr-lbl, .cr-tile .cr-u{ padding:2px 7px; font-size:9.5px; letter-spacing:.08em; margin-top:6px; }
+    .cr-dias .cr-led{ min-width:64px; padding:6px 9px; }
+    .cr-tile .cr-led{ min-width:46px; padding:7px 6px; }
+  }
+
   #quick-access{
     display:grid;
     grid-template-columns:repeat(auto-fill, minmax(140px,1fr));
@@ -876,6 +943,8 @@
       <div id="home-inner">
         <h1 id="home-titulo">Bienvenido a Espacio Zubex</h1>
         <div id="home-tagline">Tu plataforma central para la colaboración y el éxito corporativo.</div>
+
+        <section id="cuenta-regresiva" role="timer" aria-label="Cuenta regresiva para la auditoría interna ISO 14001" hidden></section>
 
         <div class="home-section-title">Accesos rápidos</div>
         <div id="quick-access"></div>
@@ -3539,6 +3608,85 @@ window.disableThreadsBackground = initThreadsBackground(document.getElementById(
       }
     });
   });
+})();
+</script>
+<script>
+// ---------------------------------------------------------------
+// Cuenta regresiva de la auditoría interna ISO 14001 (tablero en Inicio).
+// Cuenta con horas, minutos y segundos hasta el INICIO de la auditoría
+// (hora local de la computadora). Durante los dos días muestra "En curso"
+// y al terminar el segundo día el tablero desaparece solo.
+// Para otra fecha/evento basta cambiar los valores de CFG.
+// ---------------------------------------------------------------
+(function () {
+  var CFG = {
+    pre: 'Cuenta regresiva para la',
+    preEnCurso: 'Hoy se realiza la',
+    titulo: 'Auditoría interna ISO 14001',
+    fechas: '12 y 13 de noviembre de 2026',
+    inicio: new Date(2026, 10, 12, 0, 0, 0),    // 12 nov 2026, 00:00 (el mes va de 0 a 11)
+    fin:    new Date(2026, 10, 13, 23, 59, 59)  // 13 nov 2026, 23:59:59
+  };
+  var el = document.getElementById('cuenta-regresiva');
+  if (!el) return;
+  var modo = null, ref = {}, timer = null;
+
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  function esc(t) { var d = document.createElement('div'); d.textContent = t; return d.innerHTML; }
+
+  var ICONO = '<svg viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+    '<rect x="38" y="30" width="48" height="46" rx="6"/><path d="M38 44h48M52 24v12M72 24v12"/>' +
+    '<path d="M48 55h3M60 55h3M72 55h3M48 66h3M60 66h3M72 66h3" stroke-width="4"/>' +
+    '<circle cx="34" cy="58" r="20" style="fill:var(--bg)"/><path d="M34 58V46M34 58l8 5M28 34h12M34 34v4M47 40l4-4"/></svg>';
+
+  function armar(m) {
+    modo = m;
+    var info = '<div class="cr-info">' +
+      '<div class="cr-pre"><span class="cr-icono">' + ICONO + '</span><span>' + esc(m === 'curso' ? CFG.preEnCurso : CFG.pre) + '</span></div>' +
+      '<div class="cr-titulo">' + esc(CFG.titulo) + '</div>' +
+      '<span class="cr-fechas">' + esc(CFG.fechas) + '</span></div>';
+    if (m === 'cuenta') {
+      el.innerHTML = info + '<div class="cr-display">' +
+        '<div class="cr-dias"><div class="cr-led"><div class="cr-num" data-r="d">--</div></div><div class="cr-lbl" data-r="l">DÍAS</div></div>' +
+        '<div class="cr-reloj">' +
+          '<div class="cr-tile"><div class="cr-led"><div class="cr-num" data-r="h">--</div></div><span class="cr-u">HRS</span></div>' +
+          '<div class="cr-tile"><div class="cr-led"><div class="cr-num" data-r="m">--</div></div><span class="cr-u">MIN</span></div>' +
+          '<div class="cr-tile"><div class="cr-led"><div class="cr-num" data-r="s">--</div></div><span class="cr-u">SEG</span></div>' +
+        '</div></div>';
+    } else {
+      el.innerHTML = info + '<div class="cr-display cr-curso"><div class="cr-dias"><div class="cr-led"><div class="cr-num" data-r="c">--</div></div>' +
+        '<div class="cr-curso-txt">¡La auditoría está en curso!</div></div></div>';
+    }
+    ref = {};
+    Array.prototype.forEach.call(el.querySelectorAll('[data-r]'), function (n) { ref[n.getAttribute('data-r')] = n; });
+  }
+
+  function inicioDelDia(t) { var d = new Date(t); d.setHours(0, 0, 0, 0); return d.getTime(); }
+
+  function tick() {
+    if (document.hidden) return;
+    var ahora = Date.now(), ms = CFG.inicio.getTime() - ahora;
+    if (ms > 0) {
+      if (modo !== 'cuenta') armar('cuenta');
+      var d = Math.floor(ms / 864e5), h = Math.floor(ms % 864e5 / 36e5),
+          mi = Math.floor(ms % 36e5 / 6e4), s = Math.floor(ms % 6e4 / 1e3);
+      ref.d.textContent = pad(d); ref.l.textContent = d === 1 ? 'DÍA' : 'DÍAS';
+      ref.h.textContent = pad(h); ref.m.textContent = pad(mi); ref.s.textContent = pad(s);
+      el.hidden = false;
+    } else if (ahora <= CFG.fin.getTime()) {
+      if (modo !== 'curso') armar('curso');
+      var ini0 = inicioDelDia(CFG.inicio.getTime());
+      var n = Math.round((inicioDelDia(ahora) - ini0) / 864e5) + 1;
+      var total = Math.round((inicioDelDia(CFG.fin.getTime()) - ini0) / 864e5) + 1;
+      ref.c.textContent = 'DÍA ' + n + ' DE ' + total;
+      el.hidden = false;
+    } else {
+      el.hidden = true;                 // la auditoría terminó: se oculta solo
+      if (timer) clearInterval(timer);
+    }
+  }
+  tick();
+  timer = setInterval(tick, 1000);
 })();
 </script>
 </body>
