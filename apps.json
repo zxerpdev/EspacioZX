@@ -42,6 +42,7 @@
     {
       "id": "calidad",
       "nombre": "Calidad",
+      "url": "https://materiasprimaszx.github.io/Aseguramiento-de-Calidad/",
       "icono": "✅",
       "apps": [
         {
@@ -186,6 +187,7 @@
     {
       "id": "mc",
       "nombre": "Mejora Continua",
+      "url": "https://mejora2zx.github.io/MC/",
       "icono": "📈",
       "apps": [
         {
