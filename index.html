@@ -330,6 +330,9 @@
     transition:transform .18s ease;
   }
   .area-block.expanded > .area-header .area-chevron{ transform:rotate(90deg); }
+  .area-block.area-enlace > .area-header.active{ background:rgba(34,126,246,.10); }
+  .area-block.area-enlace > .area-header.active .area-title{ color:var(--zx-blue-dark); }
+  [data-theme="dark"] .area-block.area-enlace > .area-header.active .area-title{ color:var(--zx-blue); }
   .area-block.expanded > .area-header .area-title{ color:var(--zx-blue-dark); }
   [data-theme="dark"] .area-block.expanded > .area-header .area-title{ color:var(--zx-blue); }
   .area-body{
@@ -893,152 +896,6 @@
     overflow:hidden;
   }
   #threads-bg canvas{ display:block; width:100%; height:100%; }
-  :root{ --zxl-logo:url(data:image/png;base64,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); }
-  #zx-toast{ position:fixed; bottom:16px; right:16px; z-index:2147483600; background:#141a2b; color:#fff; padding:10px 16px; border-radius:8px; font:500 13px 'Poppins','Segoe UI',sans-serif; opacity:0; transition:opacity .3s; pointer-events:none; }
-  #zx-toast.show{ opacity:1; }
-  /* =====================================================================
-     LOGIN / ACTIVACIÓN / DOCUMENTOS LEGALES / COOKIES / MENÚ DE USUARIO
-     ===================================================================== */
-  #zxl, #zxlg, #zxck, #zx-usuario{ font-family:'Poppins','Segoe UI',-apple-system,Arial,sans-serif; }
-  #zxl[hidden], #zxlg[hidden], #zxck[hidden], #zx-usuario[hidden], .zxl-oculto{ display:none !important; }
-
-  /* ---- Ventana de acceso (efecto vidrio) ---- */
-  #zxl{
-    position:fixed; inset:0; z-index:2147482000; display:grid; place-items:center; padding:46px 20px 90px;
-    overflow:auto; color:#fff;
-    background:linear-gradient(135deg,#061066 0%,#0D18A8 40%,#227EF6 100%);
-  }
-  #zxl::before, #zxl::after{ content:""; position:absolute; border-radius:50%; filter:blur(70px); opacity:.5; pointer-events:none; z-index:-1; }
-  #zxl::before{ width:520px; height:520px; left:-150px; top:-130px; background:#7fb4ff; animation:zxlFlota 17s ease-in-out infinite alternate; }
-  #zxl::after{ width:640px; height:640px; right:-190px; bottom:-210px; background:#2f6bff; animation:zxlFlota 21s ease-in-out infinite alternate-reverse; }
-  @keyframes zxlFlota{ to{ transform:translate(70px,44px) scale(1.12); } }
-  /* Monograma ZX en blanco al fondo (se ve a través del vidrio de la tarjeta) */
-  .zxl-zx{ position:absolute; left:50%; top:50%; width:min(112vw,1240px); height:auto; transform:translate(-50%,-50%); opacity:.2; pointer-events:none;
-    filter:drop-shadow(0 18px 50px rgba(4,10,70,.35)); animation:zxlZx 16s ease-in-out infinite alternate; }
-  @keyframes zxlZx{ from{ transform:translate(-50%,-50%) scale(1); } to{ transform:translate(-50%,-53%) scale(1.045); } }
-  .zxl-olas{ position:absolute; left:0; right:0; bottom:0; width:100%; height:34%; opacity:.28; pointer-events:none; }
-  .zxl-tarjeta{ position:relative; z-index:1; width:min(430px,100%); margin-top:18px; }
-  .zxl-tab{
-    position:absolute; left:50%; top:-35px; transform:translateX(-50%); padding:9px 38px; white-space:nowrap;
-    border-radius:16px 16px 0 0; background:rgba(255,255,255,.26); border:1px solid rgba(255,255,255,.42); border-bottom:0;
-    -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px); font-size:.78rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
-  }
-  .zxl-cuerpo{
-    padding:30px 30px 24px; border-radius:22px; background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.4);
-    -webkit-backdrop-filter:blur(20px) saturate(150%); backdrop-filter:blur(20px) saturate(150%);
-    box-shadow:0 30px 70px rgba(4,10,70,.45), inset 0 1px 0 rgba(255,255,255,.4);
-  }
-  .zxl-logo{
-    display:block; width:150px; aspect-ratio:320/83; margin:0 auto 14px; background:#fff;
-    -webkit-mask:var(--zxl-logo) center/contain no-repeat; mask:var(--zxl-logo) center/contain no-repeat;
-  }
-  .zxl-cuerpo h2{ margin:4px 0 4px; font-size:1.45rem; font-weight:700; text-align:center; letter-spacing:-.01em; }
-  .zxl-sub{ margin:0 0 20px; text-align:center; font-size:.84rem; opacity:.88; line-height:1.45; }
-  .zxl-alerta{ display:none; margin:0 0 14px; padding:10px 13px; border-radius:12px; font-size:.82rem; line-height:1.4;
-    background:rgba(255,64,90,.26); border:1px solid rgba(255,160,170,.7); }
-  .zxl-alerta.on{ display:block; }
-  .zxl-alerta.info{ background:rgba(255,255,255,.18); border-color:rgba(255,255,255,.5); }
-  .zxl-campo{ position:relative; margin-bottom:15px; }
-  .zxl-campo label{ display:block; margin:0 0 6px 8px; font-size:.78rem; font-weight:500; opacity:.92; }
-  .zxl-campo input[type=text], .zxl-campo input[type=password], .zxl-campo input[type=tel]{
-    width:100%; height:48px; padding:0 48px 0 20px; border-radius:999px; font:inherit; font-size:.96rem; color:#fff; outline:none;
-    background:rgba(255,255,255,.12); border:1.5px solid rgba(255,255,255,.55); transition:border-color .2s, box-shadow .2s, background .2s;
-  }
-  .zxl-campo input::placeholder{ color:rgba(255,255,255,.62); }
-  .zxl-campo input:focus{ border-color:#fff; background:rgba(255,255,255,.18); box-shadow:0 0 0 4px rgba(255,255,255,.2); }
-  .zxl-campo input:-webkit-autofill{ -webkit-text-fill-color:#fff; transition:background-color 9999s; }
-  .zxl-campo.err input{ border-color:#ffb3bd; box-shadow:0 0 0 4px rgba(255,100,120,.25); }
-  .zxl-ico, .zxl-ojo{ position:absolute; right:16px; bottom:12px; width:22px; height:22px; color:#fff; opacity:.92; }
-  .zxl-ojo{ border:0; background:none; padding:0; cursor:pointer; right:15px; bottom:12px; }
-  .zxl-ojo:hover{ opacity:1; transform:scale(1.08); }
-  .zxl-ico svg, .zxl-ojo svg{ width:100%; height:100%; display:block; }
-  .zxl-fila{ display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap; margin:2px 4px 16px; font-size:.8rem; }
-  .zxl-chk{ display:flex; align-items:flex-start; gap:9px; font-size:.8rem; line-height:1.4; cursor:pointer; margin:0; }
-  .zxl-chk input{ margin-top:2px; width:17px; height:17px; flex-shrink:0; accent-color:#fff; cursor:pointer; }
-  .zxl-chk-bloque{ margin:6px 4px 10px; display:flex; flex-direction:column; gap:10px; }
-  .zxl-cuerpo a, .zxl-pie a, .zxl-enlace{ color:#fff; text-decoration:underline; text-underline-offset:2px; cursor:pointer; background:none; border:0; padding:0; font:inherit; }
-  .zxl-cuerpo a:hover, .zxl-pie a:hover, .zxl-enlace:hover{ opacity:.8; }
-  .zxl-btn{
-    width:100%; height:50px; border:0; border-radius:999px; cursor:pointer; background:#fff; color:#0D18A8;
-    font:700 .98rem 'Poppins','Segoe UI',sans-serif; letter-spacing:.02em; box-shadow:0 14px 28px rgba(4,10,70,.35);
-    transition:transform .2s, box-shadow .2s, opacity .2s; display:flex; align-items:center; justify-content:center; gap:10px;
-  }
-  .zxl-btn:hover:not(:disabled){ transform:translateY(-2px); box-shadow:0 18px 34px rgba(4,10,70,.42); }
-  .zxl-btn:disabled{ opacity:.6; cursor:default; }
-  .zxl-btn.sec{ background:transparent; color:#fff; border:1.5px solid rgba(255,255,255,.7); box-shadow:none; height:44px; margin-top:10px; font-weight:600; }
-  .zxl-giro{ width:18px; height:18px; border-radius:50%; border:2.5px solid rgba(13,24,168,.3); border-top-color:#0D18A8; animation:zxlGira .7s linear infinite; }
-  @keyframes zxlGira{ to{ transform:rotate(360deg); } }
-  .zxl-reglas{ list-style:none; margin:2px 6px 14px; padding:0; font-size:.78rem; display:grid; gap:4px; }
-  .zxl-reglas li{ display:flex; gap:8px; align-items:center; opacity:.8; }
-  .zxl-reglas li::before{ content:"○"; font-size:.8rem; width:14px; text-align:center; }
-  .zxl-reglas li.ok{ opacity:1; font-weight:600; }
-  .zxl-reglas li.ok::before{ content:"✓"; color:#9dffcb; }
-  .zxl-pie{ margin-top:16px; text-align:center; font-size:.76rem; opacity:.92; line-height:1.9; }
-  .zxl-pie span{ opacity:.6; margin:0 6px; }
-  .zxl-cookies-estado{ margin:4px 6px 12px; font-size:.78rem; opacity:.9; }
-  @media (max-width:480px){ .zxl-cuerpo{ padding:24px 20px 20px; } #zxl{ padding-top:56px; } }
-  @media (max-width:600px){ .zxl-zx{ width:230vw; top:42%; opacity:.24; } }
-  @media (prefers-reduced-motion:reduce){ #zxl::before,#zxl::after,.zxl-zx{ animation:none; } .zxl-giro{ animation-duration:2s; } }
-
-  /* ---- Visor de documentos legales ---- */
-  #zxlg{ position:fixed; inset:0; z-index:2147483300; display:grid; place-items:center; padding:18px; background:rgba(6,12,40,.62);
-    -webkit-backdrop-filter:blur(5px); backdrop-filter:blur(5px); }
-  .zxlg-panel{ width:min(760px,100%); max-height:90vh; display:flex; flex-direction:column; border-radius:18px; overflow:hidden;
-    background:var(--panel,#fff); color:var(--text,#1c2233); box-shadow:0 30px 80px rgba(4,10,70,.5); }
-  .zxlg-cab{ display:flex; align-items:center; gap:10px; padding:14px 18px; border-bottom:1px solid var(--border,#e3e7f1); }
-  .zxlg-tabs{ display:flex; gap:6px; flex-wrap:wrap; flex:1; }
-  .zxlg-tabs button{ border:1px solid var(--border,#e3e7f1); background:transparent; color:var(--muted,#6b7385); border-radius:999px; padding:6px 13px;
-    font:600 .78rem 'Poppins','Segoe UI',sans-serif; cursor:pointer; }
-  .zxlg-tabs button.on{ background:#227EF6; border-color:#227EF6; color:#fff; }
-  .zxlg-x{ width:34px; height:34px; border-radius:50%; border:1px solid var(--border,#e3e7f1); background:transparent; color:var(--text,#1c2233); font-size:16px; cursor:pointer; }
-  .zxlg-cuerpo{ padding:20px 26px 28px; overflow:auto; font-size:.88rem; line-height:1.6; }
-  .zxlg-cuerpo h3{ margin:0 0 4px; font-size:1.15rem; color:var(--zx-blue-dark,#0D18A8); }
-  .zxlg-cuerpo h4{ margin:18px 0 6px; font-size:.92rem; }
-  .zxlg-cuerpo p, .zxlg-cuerpo li{ margin:0 0 8px; }
-  .zxlg-cuerpo ul{ padding-left:20px; margin:0 0 8px; }
-  .zxlg-meta{ font-size:.76rem; color:var(--muted,#6b7385); margin-bottom:12px; }
-  .zxlg-prelim{ background:#fff4e5; border:1px solid #f0b96b; color:#7a4a00; padding:9px 12px; border-radius:10px; font-size:.8rem; margin:8px 0 12px; }
-  .zxlg-cuerpo mark{ background:#fff3a3; color:#4b3b00; padding:0 3px; border-radius:3px; }
-  .zxlg-cuerpo table{ width:100%; border-collapse:collapse; font-size:.8rem; margin:6px 0 10px; }
-  .zxlg-cuerpo th, .zxlg-cuerpo td{ border:1px solid var(--border,#e3e7f1); padding:6px 8px; text-align:left; vertical-align:top; }
-  .zxlg-cuerpo th{ background:rgba(34,126,246,.08); }
-
-  /* ---- Aviso de cookies ---- */
-  #zxck{ position:fixed; left:50%; bottom:16px; transform:translateX(-50%); z-index:2147483500; width:min(720px,calc(100% - 24px));
-    display:flex; align-items:center; gap:14px; flex-wrap:wrap; padding:14px 18px; border-radius:16px;
-    background:rgba(8,14,60,.94); color:#fff; box-shadow:0 18px 50px rgba(0,0,0,.45); border:1px solid rgba(255,255,255,.18);
-    -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); }
-  #zxck p{ margin:0; flex:1 1 300px; font-size:.8rem; line-height:1.5; }
-  #zxck a{ color:#9cc6ff; text-decoration:underline; cursor:pointer; }
-  .zxck-bt{ display:flex; gap:8px; flex-wrap:wrap; }
-  .zxck-bt button{ border-radius:999px; padding:9px 16px; font:700 .78rem 'Poppins','Segoe UI',sans-serif; cursor:pointer; border:1.5px solid rgba(255,255,255,.7); background:transparent; color:#fff; }
-  .zxck-bt button.pri{ background:#fff; color:#0D18A8; border-color:#fff; }
-
-  /* ---- Menú de usuario (barra superior) ---- */
-  #zx-usuario{ position:relative; margin-right:8px; }
-  #zx-usuario-btn{ display:flex; align-items:center; gap:7px; border:1px solid var(--border); background:transparent; color:var(--text);
-    border-radius:999px; padding:4px 11px 4px 5px; cursor:pointer; font:600 12px 'Poppins','Segoe UI',sans-serif; }
-  #zx-usuario-btn:hover{ background:rgba(34,126,246,.08); }
-  .zxu-av{ width:22px; height:22px; border-radius:50%; background:linear-gradient(135deg,#0D18A8,#227EF6); color:#fff; display:grid; place-items:center; font-size:10px; font-weight:700; }
-  .zxu-menu{ position:absolute; right:0; top:calc(100% + 6px); min-width:240px; z-index:60; background:var(--panel); color:var(--text);
-    border:1px solid var(--border); border-radius:14px; padding:8px; box-shadow:0 18px 44px rgba(13,24,168,.2); display:none; }
-  .zxu-menu.on{ display:block; }
-  .zxu-quien{ padding:8px 10px 10px; border-bottom:1px solid var(--border); margin-bottom:6px; }
-  .zxu-quien b{ display:block; font-size:13px; line-height:1.25; }
-  .zxu-quien span{ font-size:11.5px; color:var(--muted); }
-  .zxu-menu button{ display:block; width:100%; text-align:left; border:0; background:none; color:var(--text); padding:8px 10px; border-radius:9px; cursor:pointer; font:500 12.5px 'Poppins','Segoe UI',sans-serif; }
-  .zxu-menu button:hover{ background:rgba(34,126,246,.09); }
-  .zxu-menu button.salir{ color:#c0392b; font-weight:600; }
-
-  /* ---- Videos de terceros bloqueados hasta aceptar cookies ---- */
-  .video-bloq{ padding:26px 18px; text-align:center; background:rgba(255,255,255,.04); color:rgba(255,255,255,.85); font-size:13px; line-height:1.5; aspect-ratio:16/9;
-    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; }
-  .video-bloq button{ border:0; border-radius:999px; padding:9px 18px; cursor:pointer; background:#fff; color:#0D18A8; font:700 12.5px 'Poppins','Segoe UI',sans-serif; }
-
-  /* ---- Casilla de aceptación en el formulario de felicitación ---- */
-  .felic-acepto{ display:flex; align-items:flex-start; gap:8px; text-align:left; font-size:11.5px; line-height:1.45; color:rgba(255,255,255,.85); cursor:pointer; }
-  .felic-acepto input{ margin-top:2px; width:15px; height:15px; flex-shrink:0; accent-color:#227EF6; }
-  .felic-acepto a{ color:#9cc6ff; text-decoration:underline; }
 </style>
 </head>
 <body data-theme="light">
@@ -1079,18 +936,6 @@
         </div>
       </div>
       <div id="topbar-actions">
-        <div id="zx-usuario" hidden>
-          <button type="button" id="zx-usuario-btn" aria-haspopup="true"><span class="zxu-av" id="zxu-av">ZX</span><span id="zxu-txt"></span> ▾</button>
-          <div class="zxu-menu" id="zxu-menu">
-            <div class="zxu-quien"><b id="zxu-nombre"></b><span id="zxu-nomina"></span></div>
-            <button type="button" data-acc="pass">Cambiar contraseña</button>
-            <button type="button" data-acc="cookies">Preferencias de cookies</button>
-            <button type="button" data-legal="terminos">Términos y condiciones</button>
-            <button type="button" data-legal="privacidad">Aviso de privacidad</button>
-            <button type="button" data-legal="cookies">Política de cookies</button>
-            <button type="button" class="salir" data-acc="salir">Cerrar sesión</button>
-          </div>
-        </div>
         <button id="home-btn" onclick="goHome()" style="display:none">🏠 Inicio</button>
         <button id="reload-btn" onclick="reloadFrame()" style="display:none">⟳ Recargar</button>
       </div>
@@ -1295,6 +1140,17 @@ async function cargarApps() {
       header.onclick = () => bloque.classList.toggle("expanded");
       bloque.appendChild(header);
 
+      // Área que es solo un enlace al mini portal de ese equipo: el botón se ve igual, pero al hacer clic abre esa página
+      // dentro del portal (en lugar de desplegar una lista). Se define con "url" en el área de apps.json.
+      if (area.url) {
+        const appArea = { id: area.id, nombre: area.nombre, url: area.url, estado: "activa", descripcion: area.descripcion || "" };
+        appsPlanas.push({ ...appArea, _areaId: area.id });   // también aparece en accesos rápidos y en la pantalla de bienvenida
+        bloque.classList.add("area-enlace");
+        header.onclick = () => abrirApp(appArea, header);
+        contenedor.appendChild(bloque);
+        return;
+      }
+
       const body = document.createElement("div");
       body.className = "area-body";
 
@@ -1439,7 +1295,7 @@ function mostrarVista(id, display) {
 }
 
 function marcarActivo(itemEl) {
-  document.querySelectorAll(".app-item").forEach(el => el.classList.remove("active"));
+  document.querySelectorAll(".app-item.active, .area-header.active").forEach(el => el.classList.remove("active"));
   if (itemEl) itemEl.classList.add("active");
 }
 
@@ -1485,28 +1341,6 @@ function urlOrganigrama() {
 function abrirOrganigrama() {
   abrirApp({ id: "avisos-rh", nombre: "Organigrama", url: urlOrganigrama() }, null);
 }
-// La vista del organigrama (Avisos RH) vive en otro dominio y no comparte la sesión de esta persona,
-// así que el portal —ya autenticado— le entrega los datos con postMessage (solo al origen del iframe).
-function enviarOrganigrama(win, origen) {
-  if (!avisosDb || !origen || origen === 'null') return;
-  Promise.all([avisosDb.ref('organigrama').once('value'), avisosDb.ref('personal').once('value')]).then(function (r) {
-    const org = r[0].val() || {}, pers = r[1].val() || {}, minimo = {}, enOrg = {};
-    Object.keys(org.nodos || {}).forEach(function (k) { const n = org.nodos[k]; if (n && n.nomina) enOrg['N' + String(n.nomina).trim()] = true; });
-    Object.keys(pers).forEach(function (k) {
-      const p = pers[k]; minimo[k] = { nomina: p.nomina, departamento: p.departamento || null, tieneFoto: !!(p.tieneFoto || p.foto) };
-    });
-    const claves = Object.keys(minimo).filter(function (k) { return minimo[k].tieneFoto && enOrg[k]; }).slice(0, 60);
-    return Promise.all(claves.map(function (k) { return avisosDb.ref('fotosPersonal/' + k).once('value').then(function (s) { return [k, s.val()]; }); })).then(function (fs) {
-      const fotos = {}; fs.forEach(function (x) { if (x[1]) fotos[x[0]] = x[1]; });
-      win.postMessage({ tipo: 'zx-organigrama', meta: org.meta || {}, nodos: org.nodos || {}, personal: minimo, fotos: fotos }, origen);
-    });
-  }).catch(function (e) { console.warn('Organigrama:', e); });
-}
-window.addEventListener('message', function (e) {
-  const f = document.getElementById('app-frame');
-  if (!f || e.source !== f.contentWindow || !e.data || e.data.tipo !== 'zx-listo' || !/vista=organigrama/.test(f.src)) return;
-  enviarOrganigrama(f.contentWindow, e.origin);
-});
 
 function mostrarConstruccion(app, itemEl) {
   marcarActivo(itemEl);
@@ -1577,6 +1411,7 @@ function renderRailIcons(areas) {
     btn.title = area.nombre;
     btn.innerHTML = iconFor(area.id);
     btn.onclick = () => {
+      if (area.url) { abrirApp({ id: area.id, nombre: area.nombre, url: area.url }, document.querySelector('.area-block[data-area-id="' + area.id + '"] > .area-header')); return; }
       expandSidebar();
       const bloque = document.querySelector('.area-block[data-area-id="' + area.id + '"]');
       if (bloque) {
@@ -2497,7 +2332,6 @@ window.disableSplashCursor = initSplashCursor({
 </script>
 <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-database-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js"></script>
 <script>
 // ================================================================
 // AVISOS RH — lectura de cumpleaños, aniversarios y eventos
@@ -2515,12 +2349,9 @@ const avisosFirebaseConfig = {
 };
 
 let avisosDb = null;
-// Solo para pruebas: en localhost con ?emulador=1 se usan los emuladores de Firebase (en producción nunca aplica).
-const ZX_EMU = (location.hostname === 'localhost' || location.hostname === '127.0.0.1') && /[?&]emulador=1/.test(location.search);
 try {
   const avisosApp = firebase.initializeApp(avisosFirebaseConfig, "avisos");
   avisosDb = avisosApp.database();
-  if (ZX_EMU) { avisosDb.useEmulator('localhost', 9000); avisosApp.auth().useEmulator('http://localhost:9099'); }
 } catch (e) {
   console.warn("Avisos RH: Firebase no configurado todavía.", e);
 }
@@ -2656,10 +2487,8 @@ function embedVideoUrl(url) {
 }
 
 function renderVideosLista(items, mensajeVacio) {
-  window._videosUltimos = { items: items, vacio: mensajeVacio };
   const el = document.getElementById('avisos-videos');
   if (!el) return;
-  const tercerosOk = !window.ZXCookies || window.ZXCookies.terceros();
   if (!items.length) {
     el.innerHTML = `<div class="avisos-empty">${mensajeVacio}</div>`;
     return;
@@ -2671,9 +2500,7 @@ function renderVideosLista(items, mensajeVacio) {
     } else {
       const emb = embedVideoUrl(v.url || '');
       cuerpo = emb.tipo === 'iframe'
-        ? (tercerosOk
-            ? `<iframe src="${emb.src}" allowfullscreen></iframe>`
-            : `<div class="video-bloq"><div>Este video se carga desde un sitio externo (YouTube o Google Drive) que puede usar sus propias cookies.</div><button type="button" class="video-permitir">Permitir contenido de terceros</button></div>`)
+        ? `<iframe src="${emb.src}" allowfullscreen></iframe>`
         : `<a class="video-link" href="${emb.src}" target="_blank" rel="noopener">Ver video ↗</a>`;
     }
     return `<div class="video-card">
@@ -2685,9 +2512,6 @@ function renderVideosLista(items, mensajeVacio) {
     </div>`;
   }).join('');
 }
-
-document.addEventListener('click', function (e) { if (e.target.closest && e.target.closest('.video-permitir') && window.ZXCookies) window.ZXCookies.permitirTerceros(); });
-document.addEventListener('zx:cookies', function () { if (window._videosUltimos) renderVideosLista(window._videosUltimos.items, window._videosUltimos.vacio); });
 
 function cargarAvisos() {
   if (!avisosDb) {
@@ -2774,452 +2598,7 @@ function cargarAvisos() {
   });
 }
 
-// Los datos (cumpleaños, eventos, videos, felicitaciones) solo se piden cuando la persona ya inició sesión y está activada.
-window.iniciarDatosPortal = (function () { let ok = false; return function () { if (ok) return; ok = true; cargarAvisos(); }; })();
-</script>
-<script>
-// =====================================================================
-// ACCESO DE EMPLEADOS — login por número de trabajador, activación (cambio
-// de contraseña + aceptación de documentos), cookies y registro de aceptaciones.
-// Usa Firebase Authentication. Las cuentas las crea Sistemas con el script
-// "admin-usuarios.js" (el correo interno nunca se muestra).
-// =====================================================================
-(function () {
-  'use strict';
-
-  // ---------- Configuración ----------
-  var DOMINIO_USUARIOS = 'empleados.espacio.zubex.biz';
-  var LEGAL = {
-    version: '1.0',
-    fecha: '23 de octubre de 2026',
-    pendienteRevision: true,            // ← poner en false cuando el área legal apruebe los textos
-    empresa: {                          // ← completar estos datos (aparecen resaltados mientras tengan corchetes)
-      razonSocial: '[RAZÓN SOCIAL DE ZUBEX]',
-      domicilio: '[DOMICILIO DE LA EMPRESA]',
-      contacto: '[CORREO O ÁREA DE CONTACTO: SISTEMAS / RECURSOS HUMANOS]',
-      correoPrivacidad: '[CORREO PARA SOLICITUDES DE PRIVACIDAD]',
-      leyes: '[LEYES Y TRIBUNALES APLICABLES]',
-      conservacion: '[PLAZO DE CONSERVACIÓN]'
-    }
-  };
-
-  var db = (typeof avisosDb !== 'undefined') ? avisosDb : null;
-  var auth = null;
-  try { auth = firebase.app('avisos').auth(); } catch (e) { console.warn('Auth no disponible', e); }
-  var TS = (window.firebase && firebase.database) ? firebase.database.ServerValue.TIMESTAMP : { '.sv': 'timestamp' };
-
-  var $ = function (id) { return document.getElementById(id); };
-  function esc(t) { var d = document.createElement('div'); d.textContent = t == null ? '' : String(t); return d.innerHTML; }
-  function ph(v) { return /^\[/.test(v) ? '<mark>' + esc(v) + '</mark>' : esc(v); }
-
-  // ---------- Documentos legales ----------
-  function aviso() {
-    return LEGAL.pendienteRevision
-      ? '<div class="zxlg-prelim"><b>Versión preliminar.</b> Este texto debe ser revisado y aprobado por el área legal de Zubex antes de su publicación oficial. Los campos resaltados deben completarse.</div>'
-      : '';
-  }
-  function meta() { return '<div class="zxlg-meta">Versión ' + esc(LEGAL.version) + ' · Última actualización: ' + esc(LEGAL.fecha) + '</div>'; }
-
-  function docTerminos() {
-    var E = LEGAL.empresa;
-    return '<h3>Términos y condiciones de uso</h3>' + meta() + aviso() +
-      '<h4>1. Objeto</h4><p>Estos Términos regulan el acceso y uso del portal interno «Espacio Zubex» (el «Portal»), operado por ' + ph(E.razonSocial) + ' («Zubex»). Al marcar la casilla de aceptación o al usar el Portal, declaras que los leíste y los aceptas.</p>' +
-      '<h4>2. Quién puede usarlo</h4><p>Solo las personas colaboradoras de Zubex a quienes se les asignó una cuenta. Tu usuario es tu número de trabajador. La cuenta es personal e intransferible.</p>' +
-      '<h4>3. Contraseña y seguridad</h4><ul>' +
-      '<li>La contraseña inicial es temporal: debes cambiarla en tu primer ingreso.</li>' +
-      '<li>Es confidencial. No la compartas ni la dejes escrita en lugares visibles.</li>' +
-      '<li>Eres responsable de lo que se haga con tu cuenta.</li>' +
-      '<li>Si sospechas que alguien más la usa, avisa de inmediato a ' + ph(E.contacto) + '.</li>' +
-      '<li>Zubex no puede ver tu contraseña; si la olvidas, Sistemas te asigna una temporal.</li></ul>' +
-      '<h4>4. Uso permitido</h4><p>El Portal se usa para fines laborales y de comunicación interna. Queda prohibido: intentar acceder a cuentas, datos o áreas sin autorización; probar o eludir medidas de seguridad; extraer información de forma masiva o automatizada; usar los datos de otras personas para fines ajenos al trabajo; y publicar contenido ofensivo, discriminatorio, ilícito o que viole derechos de terceros.</p>' +
-      '<h4>5. Contenido que aportas</h4><p>Las felicitaciones y cualquier otro contenido que escribas son responsabilidad tuya, deben ser respetuosos y Zubex puede retirarlos. Al enviarlos autorizas que se muestren a otras personas usuarias del Portal. Se registra la cuenta desde la que se envían.</p>' +
-      '<h4>6. Aplicaciones y contenido de terceros</h4><p>El Portal abre otras aplicaciones internas, que pueden tener sus propias reglas, y puede mostrar contenido de terceros (por ejemplo videos de YouTube o Google Drive) sujeto a los términos y cookies de esos terceros. Ese contenido solo se carga si lo permites en tus preferencias de cookies.</p>' +
-      '<h4>7. Registros</h4><p>Para seguridad y como evidencia, Zubex registra la fecha y hora en que aceptas estos documentos, la versión aceptada y datos técnicos del dispositivo, como se explica en el Aviso de privacidad.</p>' +
-      '<h4>8. Disponibilidad</h4><p>El Portal se ofrece «tal cual» y puede interrumpirse por mantenimiento o fallas.</p>' +
-      '<h4>9. Propiedad intelectual</h4><p>El Portal, las marcas, logotipos y contenidos son de Zubex o de sus licenciantes y no pueden copiarse ni distribuirse sin autorización.</p>' +
-      '<h4>10. Suspensión del acceso</h4><p>Zubex puede suspender o cancelar tu acceso por baja del colaborador, incumplimiento de estos Términos o motivos de seguridad.</p>' +
-      '<h4>11. Cambios</h4><p>Zubex puede actualizar estos Términos. Cuando haya una versión nueva se te pedirá aceptarla de nuevo para seguir usando el Portal.</p>' +
-      '<h4>12. Ley aplicable</h4><p>' + ph(E.leyes) + '</p>';
-  }
-
-  function docPrivacidad() {
-    var E = LEGAL.empresa;
-    return '<h3>Aviso de privacidad</h3>' + meta() + aviso() +
-      '<h4>1. Responsable</h4><p>' + ph(E.razonSocial) + ', con domicilio en ' + ph(E.domicilio) + ', es responsable del tratamiento de tus datos personales en el portal interno «Espacio Zubex».</p>' +
-      '<h4>2. Datos que tratamos</h4><ul>' +
-      '<li><b>Identificación y laborales:</b> nombre, número de trabajador, área, departamento, puesto y fecha de ingreso.</li>' +
-      '<li><b>Fecha de nacimiento:</b> para mostrar tu cumpleaños en el Portal.</li>' +
-      '<li><b>Fotografía:</b> solo si existe en el registro de personal.</li>' +
-      '<li><b>Credenciales:</b> tu número de trabajador y tu contraseña. La contraseña la guarda cifrada el proveedor del servicio de autenticación; Zubex no puede consultarla.</li>' +
-      '<li><b>Datos de acceso y registros:</b> fecha y hora de activación de tu cuenta y de aceptación de documentos, versión aceptada, tipo de dispositivo y navegador, idioma, zona horaria y dirección de la página.</li>' +
-      '<li><b>Contenido que escribes:</b> mensajes de felicitación y el nombre que decidas incluir.</li></ul>' +
-      '<p>No solicitamos datos personales sensibles.</p>' +
-      '<h4>3. Para qué los usamos (finalidades necesarias)</h4><ul>' +
-      '<li>Crear y administrar tu cuenta y autenticar tu acceso.</li>' +
-      '<li>Mostrar información interna: organigrama, avisos, eventos, cumpleaños y aniversarios.</li>' +
-      '<li>Recibir y mostrar felicitaciones entre colaboradores.</li>' +
-      '<li>Mantener la seguridad del Portal y prevenir usos indebidos.</li>' +
-      '<li>Conservar evidencia de cuándo y cómo aceptaste estos documentos.</li></ul>' +
-      '<p>No usamos tus datos para finalidades secundarias o de mercadotecnia.</p>' +
-      '<h4>4. Con quién los compartimos</h4><p>No vendemos tus datos. La información se almacena y procesa en infraestructura de Google (Firebase), proveedor que actúa por cuenta de Zubex y cuyos servidores se encuentran en Estados Unidos. Dentro del Portal, otras personas colaboradoras solo ven los datos necesarios para cada función (por ejemplo, nombre, puesto, foto y cumpleaños del día). Podremos entregar información a autoridades cuando la ley lo exija.</p>' +
-      '<h4>5. Tus derechos (ARCO) y revocación</h4><p>Puedes solicitar el acceso, rectificación, cancelación u oposición al tratamiento de tus datos, así como revocar tu consentimiento o limitar el uso de tus datos, enviando una solicitud a ' + ph(E.correoPrivacidad) + ' con tu nombre, número de trabajador, la descripción de tu petición y un documento que acredite tu identidad. Te responderemos en los plazos que establece la ley. La cancelación puede estar sujeta a la conservación de datos por obligaciones legales o laborales.</p>' +
-      '<h4>6. Cookies y almacenamiento local</h4><p>El Portal usa almacenamiento en tu navegador. Consulta la Política de cookies para conocer los detalles y cambiar tus preferencias.</p>' +
-      '<h4>7. Conservación</h4><p>Conservamos tus datos mientras seas colaborador y el tiempo adicional necesario para cumplir obligaciones legales. Los registros de aceptación se conservan durante ' + ph(E.conservacion) + '.</p>' +
-      '<h4>8. Cambios a este aviso</h4><p>Cualquier cambio se publicará en el Portal y, si es necesario, se te pedirá aceptarlo de nuevo.</p>' +
-      '<h4>9. Autoridad</h4><p>Si consideras que tu derecho a la protección de datos personales fue vulnerado, puedes acudir a la autoridad de protección de datos competente.</p>' +
-      '<h4>10. Consentimiento</h4><p>Al marcar la casilla «Acepto el Aviso de privacidad» manifiestas que lo leíste y consientes el tratamiento de tus datos en los términos descritos.</p>';
-  }
-
-  function docCookies() {
-    return '<h3>Política de cookies y almacenamiento local</h3>' + meta() + aviso() +
-      '<h4>Qué son</h4><p>Son pequeños archivos o datos que el portal guarda en tu navegador para funcionar o recordar tus preferencias.</p>' +
-      '<h4>Qué usa este Portal</h4>' +
-      '<table><tr><th>Elemento</th><th>Tipo</th><th>Para qué sirve</th><th>Duración</th></tr>' +
-      '<tr><td>Sesión (Firebase Authentication)</td><td>Necesaria</td><td>Mantener tu sesión iniciada y proteger tu cuenta.</td><td>Hasta que cierres sesión. Si no marcaste «Mantener sesión iniciada», solo mientras dure la pestaña.</td></tr>' +
-      '<tr><td>zx-cookies (almacenamiento local)</td><td>Necesaria</td><td>Recordar tu elección sobre cookies.</td><td>12 meses</td></tr>' +
-      '<tr><td>Contenido de terceros (videos de YouTube y Google Drive)</td><td>Opcional</td><td>Mostrar videos dentro del Portal. Esos sitios pueden colocar sus propias cookies.</td><td>Según cada tercero</td></tr></table>' +
-      '<h4>Lo que no usamos</h4><p>No usamos cookies publicitarias ni de analítica o seguimiento.</p>' +
-      '<h4>Recursos externos necesarios</h4><p>Para funcionar, el Portal carga componentes desde servidores de Google (Firebase) y de redes de distribución de contenido (como cdnjs y esm.sh). Al cargarlos, esos servidores reciben tu dirección IP.</p>' +
-      '<h4>Tu elección</h4><p>Puedes permitir solo lo necesario o también el contenido de terceros. Si eliges solo lo necesario, los videos no se mostrarán hasta que lo permitas. Puedes cambiar tu elección en cualquier momento desde tu menú de usuario → «Preferencias de cookies», o borrando los datos del sitio en tu navegador.</p>';
-  }
-
-  var DOCS = {
-    terminos: { titulo: 'Términos y condiciones', html: docTerminos },
-    privacidad: { titulo: 'Aviso de privacidad', html: docPrivacidad },
-    cookies: { titulo: 'Política de cookies', html: docCookies }
-  };
-  function textoDoc(id) { var d = document.createElement('div'); d.innerHTML = DOCS[id].html(); return d.textContent.replace(/\s+/g, ' ').trim(); }
-  function sha256(t) {
-    return crypto.subtle.digest('SHA-256', new TextEncoder().encode(t)).then(function (b) {
-      return Array.prototype.map.call(new Uint8Array(b), function (x) { return ('0' + x.toString(16)).slice(-2); }).join('');
-    });
-  }
-
-  // ---------- Visor de documentos ----------
-  function abrirLegal(id) {
-    if (!DOCS[id]) id = 'privacidad';
-    var tabs = $('zxlg-tabs'); tabs.innerHTML = '';
-    Object.keys(DOCS).forEach(function (k) {
-      var b = document.createElement('button'); b.type = 'button'; b.textContent = DOCS[k].titulo; if (k === id) b.className = 'on';
-      b.onclick = function () { abrirLegal(k); }; tabs.appendChild(b);
-    });
-    $('zxlg-cuerpo').innerHTML = DOCS[id].html(); $('zxlg-cuerpo').scrollTop = 0;
-    $('zxlg').hidden = false;
-  }
-  function cerrarLegal() { $('zxlg').hidden = true; }
-
-  // ---------- Cookies ----------
-  var CK_KEY = 'zx-cookies';
-  function ckLeer() {
-    try {
-      var o = JSON.parse(localStorage.getItem(CK_KEY) || 'null');
-      if (!o || o.v !== LEGAL.version) return null;
-      if (Date.now() - new Date(o.fecha).getTime() > 365 * 864e5) return null;
-      return o;
-    } catch (e) { return null; }
-  }
-  function ckGuardar(terceros) {
-    var o = { v: LEGAL.version, terceros: !!terceros, fecha: new Date().toISOString(), registrado: false };
-    try { localStorage.setItem(CK_KEY, JSON.stringify(o)); } catch (e) {}
-    return o;
-  }
-  function ckMostrar() { $('zxck').hidden = false; }
-  function ckEstadoTexto() {
-    var o = ckLeer();
-    return o ? ('Preferencia de cookies: ' + (o.terceros ? 'permitir también contenido de terceros.' : 'solo las necesarias.')) : 'Aún no has elegido tus preferencias de cookies.';
-  }
-  window.ZXCookies = {
-    terceros: function () { var o = ckLeer(); return !!(o && o.terceros); },
-    abrirPreferencias: ckMostrar,
-    permitirTerceros: function () { ckGuardar(true); $('zxck').hidden = true; document.dispatchEvent(new CustomEvent('zx:cookies')); registrarCookiesPendiente(); }
-  };
-
-  // ---------- Registro de aceptaciones ----------
-  function construirRegistro(contexto, metodo, ids) {
-    return Promise.all(ids.map(function (id) { return sha256(textoDoc(id)).then(function (h) { return [id, h]; }); })).then(function (pares) {
-      var docs = {};
-      pares.forEach(function (p) { docs[p[0]] = { version: LEGAL.version, hash: p[1] }; });
-      if (docs.cookies) { var ck = ckLeer(); docs.cookies.eleccion = ck ? (ck.terceros ? 'todas' : 'solo-necesarias') : 'sin-elegir'; }
-      return {
-        contexto: contexto, metodo: metodo, documentos: docs, fecha: TS, fechaLocal: new Date().toISOString(),
-        ua: String(navigator.userAgent || '').slice(0, 300), idioma: String(navigator.language || '').slice(0, 20),
-        zona: String((Intl.DateTimeFormat().resolvedOptions() || {}).timeZone || '').slice(0, 60),
-        pantalla: (screen.width + 'x' + screen.height).slice(0, 20), url: (location.origin + location.pathname).slice(0, 200)
-      };
-    });
-  }
-  function claveNueva(uid) { return db.ref('aceptaciones/' + uid).push().key; }
-
-  // ---------- Estado ----------
-  var S = { user: null, datos: null, estado: 'inicio', pendiente: null, claveActual: null, modo: 'activacion', procesando: null };
-  var resolverListo; var listo = new Promise(function (r) { resolverListo = r; });
-
-  function alerta(donde, txt, info) {
-    var a = $('zxl-alerta-' + donde); if (!a) return;
-    if (!txt) { a.className = 'zxl-alerta'; a.textContent = ''; return; }
-    a.textContent = txt; a.className = 'zxl-alerta on' + (info ? ' info' : '');
-  }
-  function btn(b, cargando, texto) {
-    b.disabled = !!cargando;
-    if (cargando) { b.innerHTML = '<span class="zxl-giro"></span> ' + esc(texto || 'Un momento…'); } else { b.textContent = texto; }
-  }
-  function msgError(err) {
-    var c = (err && err.code) || '';
-    if (/invalid-credential|wrong-password|user-not-found|invalid-login/.test(c)) return 'Número de trabajador o contraseña incorrectos.';
-    if (/too-many-requests/.test(c)) return 'Demasiados intentos. Espera unos minutos e inténtalo de nuevo.';
-    if (/user-disabled/.test(c)) return 'Tu acceso está deshabilitado. Contacta a Sistemas.';
-    if (/network-request-failed/.test(c)) return 'Sin conexión. Revisa tu red e inténtalo de nuevo.';
-    if (/referer|requests-from/.test(c) || /referer/i.test((err && err.message) || '')) return 'Este sitio no está autorizado para iniciar sesión. Contacta a Sistemas.';
-    if (/requires-recent-login/.test(c)) return 'Por seguridad vuelve a iniciar sesión e inténtalo de nuevo.';
-    if (/weak-password/.test(c)) return 'La contraseña es demasiado débil.';
-    return 'No se pudo completar la operación (' + (c || 'error') + ').';
-  }
-
-  // ---------- Pantallas ----------
-  function mostrarOverlay() { $('zxl').hidden = false; }
-  function ocultarOverlay() { $('zxl').hidden = true; }
-  function mostrarLogin() {
-    S.estado = 'login'; S.modo = 'login';
-    $('zxl-login').classList.remove('zxl-oculto'); $('zxl-act').classList.add('zxl-oculto');
-    $('zxl-tab').textContent = 'Acceso';
-    $('zxl-pass').value = ''; alerta('login', '');
-    btn($('zxl-entrar'), false, 'Entrar');
-    mostrarOverlay();
-    setTimeout(function () { try { ($('zxl-user').value ? $('zxl-pass') : $('zxl-user')).focus(); } catch (e) {} }, 60);
-  }
-  function rechazar(txt) {
-    S.estado = 'rechazado';
-    return auth.signOut().catch(function () {}).then(function () { mostrarLogin(); alerta('login', txt); });
-  }
-  function mostrarActivacion(modo) {
-    S.modo = modo; if (modo !== 'cambiar') S.estado = modo;   // cambiar contraseña no interrumpe la sesión activa
-    var conClave = modo !== 'reaceptacion';
-    var pedirActual = modo === 'cambiar' || !S.claveActual;
-    $('zxl-login').classList.add('zxl-oculto'); $('zxl-act').classList.remove('zxl-oculto');
-    $('zxl-tab').textContent = modo === 'cambiar' ? 'Seguridad' : (modo === 'reaceptacion' ? 'Documentos' : 'Activación');
-    $('zxl-act-titulo').textContent = modo === 'cambiar' ? 'Cambiar contraseña' : (modo === 'reaceptacion' ? 'Actualizamos nuestros documentos' : 'Crea tu contraseña');
-    $('zxl-act-sub').textContent = modo === 'cambiar' ? 'Escribe tu contraseña actual y la nueva.'
-      : (modo === 'reaceptacion' ? 'Hay una nueva versión de los documentos. Léelos y acéptalos para continuar.'
-      : 'Es tu primer ingreso. Por seguridad debes cambiar tu contraseña inicial y aceptar los documentos para continuar.');
-    $('zxl-c-actual').hidden = !(conClave && pedirActual);
-    $('zxl-c-nueva').hidden = !conClave; $('zxl-c-conf').hidden = !conClave; $('zxl-reglas').hidden = !conClave;
-    $('zxl-aceptos').hidden = modo === 'cambiar';
-    $('zxl-ck-estado').hidden = modo === 'cambiar'; $('zxl-ck-estado').textContent = ckEstadoTexto();
-    ['zxl-actual', 'zxl-nueva', 'zxl-conf'].forEach(function (i) { $(i).value = ''; });
-    $('zxl-acepto-t').checked = false; $('zxl-acepto-p').checked = false;
-    $('zxl-act-salir').textContent = modo === 'cambiar' ? 'Cancelar' : 'Cerrar sesión';
-    alerta('act', ''); reglas(); S.procesandoAct = false;
-    btn($('zxl-act-btn'), false, modo === 'cambiar' ? 'Cambiar contraseña' : (modo === 'reaceptacion' ? 'Aceptar y continuar' : 'Guardar y continuar'));
-    mostrarOverlay();
-    setTimeout(function () { try { ($('zxl-c-actual').hidden ? $('zxl-nueva') : $('zxl-actual')).focus(); } catch (e) {} }, 60);
-    return Promise.resolve();
-  }
-
-  function reglas() {
-    var n = $('zxl-nueva').value, c = $('zxl-conf').value, nom = (S.datos && S.datos.nomina) || '';
-    var actual = S.claveActual || $('zxl-actual').value;
-    var ok = {
-      len: n.length >= 8, let: /[A-Za-zÁÉÍÓÚÜÑáéíóúüñ]/.test(n), num: /\d/.test(n),
-      dif: n.length > 0 && n !== actual && (!nom || n.indexOf(nom) === -1),
-      igual: n.length > 0 && n === c
-    };
-    Array.prototype.forEach.call($('zxl-reglas').querySelectorAll('li'), function (li) { li.classList.toggle('ok', !!ok[li.getAttribute('data-r')]); });
-    return ok.len && ok.let && ok.num && ok.dif && ok.igual;
-  }
-
-  function pintarUsuario(d) {
-    var ini = String(d.nombre || d.nomina || 'ZX').trim().split(/\s+/).slice(0, 2).map(function (p) { return p[0]; }).join('').toUpperCase();
-    $('zxu-av').textContent = ini || 'ZX'; $('zxu-txt').textContent = d.nomina;
-    $('zxu-nombre').textContent = d.nombre || ('Trabajador ' + d.nomina); $('zxu-nomina').textContent = 'N.º de trabajador ' + d.nomina;
-    $('zx-usuario').hidden = false;
-  }
-
-  function registrarCookiesPendiente() {
-    var o = ckLeer();
-    if (!db || !S.user || S.estado !== 'listo' || !o || o.registrado) return;
-    var uid = S.user.uid;
-    construirRegistro('cookies', 'Botón en el aviso de cookies', ['cookies']).then(function (reg) {
-      reg.fechaLocal = o.fecha;
-      var upd = {}; upd['aceptaciones/' + uid + '/' + claveNueva(uid)] = reg;
-      return db.ref().update(upd);
-    }).then(function () { o.registrado = true; try { localStorage.setItem(CK_KEY, JSON.stringify(o)); } catch (e) {} })
-      .catch(function (e) { console.warn('No se pudo registrar la elección de cookies', e); });
-  }
-
-  function entrar(d) {
-    S.estado = 'listo'; ocultarOverlay(); pintarUsuario(d);
-    if (typeof window.iniciarDatosPortal === 'function') window.iniciarDatosPortal();
-    registrarCookiesPendiente();
-    var cb = S.pendiente; S.pendiente = null;
-    if (cb) { try { cb(); } catch (e) { console.error(e); } }
-    document.dispatchEvent(new CustomEvent('zx:sesion', { detail: { nomina: d.nomina, uid: S.user && S.user.uid } }));
-    return Promise.resolve();
-  }
-
-  function procesar(u) {
-    if (S.procesando) return S.procesando;
-    var p;
-    if (!u) {
-      S.user = null; S.datos = null; S.claveActual = null; $('zx-usuario').hidden = true;
-      mostrarLogin(); p = Promise.resolve();
-    } else {
-      S.user = u;
-      p = db.ref('usuarios/' + u.uid).once('value').then(function (snap) {
-        var d = snap.val(); S.datos = d;
-        if (!d || !d.nomina) return rechazar('Esta cuenta no está habilitada para el portal. Contacta a Sistemas.');
-        if (!d.passwordCambiada || !d.activo) return mostrarActivacion('activacion');
-        if (!d.aceptacion || d.aceptacion.version !== LEGAL.version) return mostrarActivacion('reaceptacion');
-        return entrar(d);
-      }).catch(function (e) {
-        console.warn(e);
-        return auth.signOut().catch(function () {}).then(function () { mostrarLogin(); alerta('login', 'No se pudo verificar tu cuenta. Revisa tu conexión e inténtalo de nuevo.'); });
-      });
-    }
-    S.procesando = p;
-    var fin = function () { S.procesando = null; btn($('zxl-entrar'), false, 'Entrar'); resolverListo(); };
-    p.then(fin, fin);
-    return p;
-  }
-
-  function requerir(cb) {
-    S.pendiente = cb;
-    listo.then(function () {
-      if (S.estado === 'listo') { var c = S.pendiente; S.pendiente = null; if (c) c(); }
-    });
-  }
-
-  // ---------- Acciones ----------
-  function iniciarSesion(ev) {
-    ev.preventDefault();
-    var nom = $('zxl-user').value.replace(/\D/g, ''), pass = $('zxl-pass').value;
-    $('zxl-c-user').classList.toggle('err', !nom); $('zxl-c-pass').classList.toggle('err', !pass);
-    if (!nom || !pass) { alerta('login', 'Escribe tu número de trabajador y tu contraseña.'); return; }
-    if (!auth) { alerta('login', 'El módulo de acceso no está disponible. Contacta a Sistemas.'); return; }
-    alerta('login', ''); btn($('zxl-entrar'), true, 'Verificando…');
-    var email = nom + '@' + DOMINIO_USUARIOS;
-    var persistencia = $('zxl-mantener').checked ? firebase.auth.Auth.Persistence.LOCAL : firebase.auth.Auth.Persistence.SESSION;
-    var usada = pass;
-    auth.setPersistence(persistencia).then(function () { return auth.signInWithEmailAndPassword(email, pass); })
-      .catch(function (err) {
-        // las contraseñas iniciales son MAYÚSCULAS con guion: si las escribieron en minúsculas, se reintenta normalizadas
-        if (/invalid-credential|wrong-password|invalid-login/.test((err && err.code) || '') && /^[A-Za-z2-9]{4}-?[A-Za-z2-9]{4}$/.test(pass)) {
-          var n = pass.toUpperCase().replace(/^(.{4})-?(.{4})$/, '$1-$2');
-          if (n !== pass) { usada = n; return auth.signInWithEmailAndPassword(email, n); }
-        }
-        throw err;
-      })
-      .then(function () { S.claveActual = usada; })     // onAuthStateChanged continúa el flujo
-      .catch(function (err) { btn($('zxl-entrar'), false, 'Entrar'); alerta('login', msgError(err)); });
-  }
-
-  function enviarActivacion(ev) {
-    ev.preventDefault();
-    if (S.procesandoAct) return;
-    var modo = S.modo, u = auth.currentUser;
-    if (!u || !S.datos) { mostrarLogin(); return; }
-    var uid = u.uid;
-    var conClave = modo !== 'reaceptacion', conAceptos = modo !== 'cambiar';
-    if (conClave && !reglas()) { alerta('act', 'Revisa los requisitos de la contraseña: debe cumplir todos los puntos de la lista.'); return; }
-    if (conAceptos && !($('zxl-acepto-t').checked && $('zxl-acepto-p').checked)) { alerta('act', 'Para continuar debes aceptar los Términos y condiciones y el Aviso de privacidad.'); return; }
-    alerta('act', ''); S.procesandoAct = true; btn($('zxl-act-btn'), true, 'Guardando…');
-    var nueva = $('zxl-nueva').value, actual = S.claveActual || $('zxl-actual').value;
-    if (modo === 'cambiar') actual = $('zxl-actual').value;
-
-    var pasoClave = Promise.resolve();
-    if (conClave) {
-      pasoClave = Promise.resolve().then(function () {
-        if (!S.claveActual || modo === 'cambiar') {
-          if (!actual) throw { code: 'zx/falta-actual' };
-          return u.reauthenticateWithCredential(firebase.auth.EmailAuthProvider.credential(u.email, actual));
-        }
-      }).then(function () { return u.updatePassword(nueva); }).then(function () { S.claveActual = nueva; });
-    }
-    pasoClave.then(function () {
-      if (modo === 'cambiar') {
-        var upd = {}; upd['usuarios/' + uid + '/passwordCambiada'] = TS; return db.ref().update(upd);
-      }
-      return construirRegistro(modo === 'activacion' ? 'activacion' : 'reaceptacion',
-        modo === 'activacion' ? 'Casillas marcadas en la pantalla de activación de cuenta' : 'Casillas marcadas al aceptar una nueva versión de los documentos',
-        ['terminos', 'privacidad', 'cookies']).then(function (reg) {
-        var upd = {};
-        if (conClave) upd['usuarios/' + uid + '/passwordCambiada'] = TS;
-        upd['usuarios/' + uid + '/aceptacion'] = { version: LEGAL.version, fecha: TS, metodo: reg.metodo };
-        upd['aceptaciones/' + uid + '/' + claveNueva(uid)] = reg;
-        return db.ref().update(upd).then(function () { return db.ref('usuarios/' + uid + '/activo').set(true); }).then(function () {
-          var ck = ckLeer(); if (ck && reg.documentos.cookies && reg.documentos.cookies.eleccion !== 'sin-elegir') { ck.registrado = true; try { localStorage.setItem(CK_KEY, JSON.stringify(ck)); } catch (e) {} }
-        });
-      });
-    }).then(function () {
-      S.procesandoAct = false;
-      if (modo === 'cambiar') { ocultarOverlay(); toast('Contraseña actualizada.'); return; }
-      S.procesando = null; return procesar(auth.currentUser);
-    }).catch(function (err) {
-      S.procesandoAct = false;
-      btn($('zxl-act-btn'), false, modo === 'cambiar' ? 'Cambiar contraseña' : (modo === 'reaceptacion' ? 'Aceptar y continuar' : 'Guardar y continuar'));
-      var txtErr = err && err.code === 'zx/falta-actual' ? 'Escribe tu contraseña actual.'
-        : ((modo === 'cambiar' || (modo === 'activacion' && !S.claveActual)) && /invalid-credential|wrong-password/.test((err && err.code) || '') ? 'La contraseña actual no es correcta.' : msgError(err));
-      alerta('act', txtErr);
-    });
-  }
-
-  function toast(t) {
-    var s = $('zx-toast'); if (!s) { alert(t); return; }
-    s.textContent = t; s.classList.add('show'); setTimeout(function () { s.classList.remove('show'); }, 2600);
-  }
-  function cerrarSesion() {
-    (auth ? auth.signOut() : Promise.resolve()).catch(function () {}).then(function () { location.reload(); });
-  }
-
-  // ---------- Eventos ----------
-  function iniciar() {
-    $('zxl-login').addEventListener('submit', iniciarSesion);
-    $('zxl-act').addEventListener('submit', enviarActivacion);
-    $('zxl-user').addEventListener('input', function () { this.value = this.value.replace(/\D/g, ''); $('zxl-c-user').classList.remove('err'); });
-    $('zxl-pass').addEventListener('input', function () { $('zxl-c-pass').classList.remove('err'); alerta('login', ''); });
-    ['zxl-actual', 'zxl-nueva', 'zxl-conf'].forEach(function (i) { $(i).addEventListener('input', function () { reglas(); alerta('act', ''); }); });
-    $('zxl-olvide').addEventListener('click', function () {
-      alerta('login', 'Para restablecer tu contraseña comunícate con Sistemas o Recursos Humanos con tu número de trabajador. Te darán una contraseña temporal nueva.', true);
-    });
-    $('zxl-act-salir').addEventListener('click', function () { if (S.modo === 'cambiar') ocultarOverlay(); else cerrarSesion(); });
-    $('zxlg-x').addEventListener('click', cerrarLegal);
-    $('zxlg').addEventListener('click', function (e) { if (e.target === $('zxlg')) cerrarLegal(); });
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !$('zxlg').hidden) cerrarLegal(); });
-    document.addEventListener('click', function (e) {
-      var o = e.target.closest && e.target.closest('[data-ojo]');
-      if (o) { var i = $(o.getAttribute('data-ojo')); i.type = i.type === 'password' ? 'text' : 'password'; o.setAttribute('aria-label', i.type === 'password' ? 'Mostrar contraseña' : 'Ocultar contraseña'); return; }
-      var l = e.target.closest && e.target.closest('[data-legal]');
-      if (l) { e.preventDefault(); $('zxu-menu').classList.remove('on'); abrirLegal(l.getAttribute('data-legal')); return; }
-      var a = e.target.closest && e.target.closest('[data-acc]');
-      if (a) {
-        $('zxu-menu').classList.remove('on'); var acc = a.getAttribute('data-acc');
-        if (acc === 'salir') cerrarSesion(); else if (acc === 'pass') mostrarActivacion('cambiar'); else if (acc === 'cookies') ckMostrar();
-        return;
-      }
-      if (e.target.closest && e.target.closest('#zx-usuario-btn')) { $('zxu-menu').classList.toggle('on'); return; }
-      if (!(e.target.closest && e.target.closest('#zxu-menu'))) $('zxu-menu').classList.remove('on');
-    });
-    $('zxck-nec').addEventListener('click', function () { ckGuardar(false); $('zxck').hidden = true; document.dispatchEvent(new CustomEvent('zx:cookies')); registrarCookiesPendiente(); });
-    $('zxck-todas').addEventListener('click', function () { ckGuardar(true); $('zxck').hidden = true; document.dispatchEvent(new CustomEvent('zx:cookies')); registrarCookiesPendiente(); });
-    if (!ckLeer()) ckMostrar();
-    document.addEventListener('zx:cookies', function () { var e = $('zxl-ck-estado'); if (e) e.textContent = ckEstadoTexto(); });
-
-    if (!auth || !db) { mostrarLogin(); alerta('login', 'El módulo de acceso no está disponible. Contacta a Sistemas.'); resolverListo(); return; }
-    mostrarOverlay();
-    auth.onAuthStateChanged(function (u) { procesar(u); });
-  }
-
-  window.ZXAuth = {
-    requerir: requerir,
-    uid: function () { return S.user ? S.user.uid : null; },
-    nomina: function () { return S.datos ? S.datos.nomina : null; },
-    listo: function () { return S.estado === 'listo'; },
-    abrirLegal: abrirLegal,
-    cerrarSesion: cerrarSesion,
-    registro: construirRegistro,
-    claveRegistro: claveNueva
-  };
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', iniciar); else iniciar();
-})();
+cargarAvisos();
 </script>
 
 <script type="module">
@@ -3471,97 +2850,6 @@ window.disableThreadsBackground = initThreadsBackground(document.getElementById(
 });
 </script>
 
-<!-- ===== Ventana de acceso (login) y activación ===== -->
-<div id="zxl" hidden role="dialog" aria-modal="true" aria-labelledby="zxl-titulo">
-  <svg class="zxl-olas" viewBox="0 0 1440 320" preserveAspectRatio="none" aria-hidden="true">
-    <path fill="#fff" d="M0,224 C180,160 320,288 520,240 C720,192 860,96 1080,144 C1260,184 1360,248 1440,224 L1440,320 L0,320 Z"/>
-    <path fill="#fff" opacity=".55" d="M0,276 C220,228 400,306 640,274 C880,242 1040,178 1240,218 C1340,238 1400,266 1440,258 L1440,320 L0,320 Z"/>
-  </svg>
-  <svg class="zxl-zx" viewBox="41 87 217.5 125.5" aria-hidden="true"><path fill="#fff" fill-rule="evenodd" d="M258.5 212.5 L219 212.5 L193 177.5 L168 212.5 L41 212.5 L100.5 117 L49 117 L49 87 L173 87 L193 119.5 L215 87 L253 87 L215.5 146.5 Z M146.5 182 L171.5 147 L147 111.5 L101.5 182 Z"/></svg>
-  <div class="zxl-tarjeta">
-    <div class="zxl-tab" id="zxl-tab">Acceso</div>
-    <div class="zxl-cuerpo">
-      <span class="zxl-logo" role="img" aria-label="Zubex"></span>
-
-      <form id="zxl-login" novalidate>
-        <h2 id="zxl-titulo">Iniciar sesión</h2>
-        <p class="zxl-sub">Ingresa con tu número de trabajador y tu contraseña.</p>
-        <div class="zxl-alerta" id="zxl-alerta-login" role="alert"></div>
-        <div class="zxl-campo" id="zxl-c-user">
-          <label for="zxl-user">Número de trabajador</label>
-          <input id="zxl-user" type="text" inputmode="numeric" autocomplete="username" placeholder="Ej. 3536" maxlength="8">
-          <span class="zxl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></span>
-        </div>
-        <div class="zxl-campo" id="zxl-c-pass">
-          <label for="zxl-pass">Contraseña</label>
-          <input id="zxl-pass" type="password" autocomplete="current-password" placeholder="••••••••">
-          <button type="button" class="zxl-ojo" data-ojo="zxl-pass" aria-label="Mostrar contraseña"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></button>
-        </div>
-        <div class="zxl-fila">
-          <label class="zxl-chk"><input type="checkbox" id="zxl-mantener"> Mantener sesión iniciada</label>
-          <button type="button" class="zxl-enlace" id="zxl-olvide">¿Olvidaste tu contraseña?</button>
-        </div>
-        <button class="zxl-btn" id="zxl-entrar" type="submit">Entrar</button>
-      </form>
-
-      <form id="zxl-act" class="zxl-oculto" novalidate>
-        <h2 id="zxl-act-titulo">Crea tu contraseña</h2>
-        <p class="zxl-sub" id="zxl-act-sub"></p>
-        <div class="zxl-alerta" id="zxl-alerta-act" role="alert"></div>
-        <div class="zxl-campo" id="zxl-c-actual" hidden>
-          <label for="zxl-actual">Contraseña actual</label>
-          <input id="zxl-actual" type="password" autocomplete="current-password" placeholder="Tu contraseña actual o inicial">
-          <button type="button" class="zxl-ojo" data-ojo="zxl-actual" aria-label="Mostrar contraseña"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></button>
-        </div>
-        <div class="zxl-campo" id="zxl-c-nueva">
-          <label for="zxl-nueva">Nueva contraseña</label>
-          <input id="zxl-nueva" type="password" autocomplete="new-password" placeholder="Mínimo 8 caracteres">
-          <button type="button" class="zxl-ojo" data-ojo="zxl-nueva" aria-label="Mostrar contraseña"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></button>
-        </div>
-        <div class="zxl-campo" id="zxl-c-conf">
-          <label for="zxl-conf">Confirma tu nueva contraseña</label>
-          <input id="zxl-conf" type="password" autocomplete="new-password" placeholder="Vuelve a escribirla">
-          <button type="button" class="zxl-ojo" data-ojo="zxl-conf" aria-label="Mostrar contraseña"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></button>
-        </div>
-        <ul class="zxl-reglas" id="zxl-reglas">
-          <li data-r="len">Mínimo 8 caracteres</li>
-          <li data-r="let">Al menos una letra</li>
-          <li data-r="num">Al menos un número</li>
-          <li data-r="dif">Distinta a tu contraseña actual y sin tu número de trabajador</li>
-          <li data-r="igual">Las dos contraseñas coinciden</li>
-        </ul>
-        <div class="zxl-chk-bloque" id="zxl-aceptos">
-          <label class="zxl-chk"><input type="checkbox" id="zxl-acepto-t"><span>He leído y acepto los <a data-legal="terminos" href="#">Términos y condiciones</a>.</span></label>
-          <label class="zxl-chk"><input type="checkbox" id="zxl-acepto-p"><span>He leído y acepto el <a data-legal="privacidad" href="#">Aviso de privacidad</a>.</span></label>
-        </div>
-        <p class="zxl-cookies-estado" id="zxl-ck-estado"></p>
-        <button class="zxl-btn" id="zxl-act-btn" type="submit">Guardar y continuar</button>
-        <button class="zxl-btn sec" id="zxl-act-salir" type="button">Cerrar sesión</button>
-      </form>
-
-      <div class="zxl-pie">
-        <a data-legal="terminos" href="#">Términos y condiciones</a><span>·</span><a data-legal="privacidad" href="#">Aviso de privacidad</a><span>·</span><a data-legal="cookies" href="#">Política de cookies</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ===== Visor de documentos legales ===== -->
-<div id="zxlg" hidden role="dialog" aria-modal="true" aria-label="Documentos legales">
-  <div class="zxlg-panel">
-    <div class="zxlg-cab"><div class="zxlg-tabs" id="zxlg-tabs"></div><button type="button" class="zxlg-x" id="zxlg-x" aria-label="Cerrar">✕</button></div>
-    <div class="zxlg-cuerpo" id="zxlg-cuerpo"></div>
-  </div>
-</div>
-
-<!-- ===== Aviso de cookies ===== -->
-<div id="zxck" hidden role="region" aria-label="Aviso de cookies">
-  <p>Este portal usa almacenamiento en tu navegador para mantener tu sesión (necesario). Con tu permiso también carga contenido de terceros, como videos de YouTube o Google Drive, que pueden usar sus propias cookies. <a data-legal="cookies" href="#">Más información</a></p>
-  <div class="zxck-bt"><button type="button" id="zxck-nec">Solo necesarias</button><button type="button" class="pri" id="zxck-todas">Aceptar todas</button></div>
-</div>
-
-<div id="zx-toast" role="status" aria-live="polite"></div>
-
 <!-- =====================================================================
      PANTALLA DE BIENVENIDA ZX — Zubex Industrial
      ===================================================================== -->
@@ -3614,19 +2902,15 @@ window.disableThreadsBackground = initThreadsBackground(document.getElementById(
     unaVezPorSesion: false,
     pildoras: [],             // se llenan solas con las apps activas (ver actualizarPildorasBienvenida)
     alEntrar: function () {
-      // Después de "Entrar" se pide el acceso (número de trabajador + contraseña).
-      // Si se entró dando clic en una píldora (una app específica), se abre al terminar el acceso;
-      // si se entró con el botón "Entrar", se va a la pantalla de Inicio.
-      var seguir = function () {
-        if (window._zxAppPendiente) {
-          var app = window._zxAppPendiente;
-          window._zxAppPendiente = null;
-          abrirApp(app, null);
-        } else {
-          goHome();
-        }
-      };
-      if (window.ZXAuth) window.ZXAuth.requerir(seguir); else seguir();
+      // Si se entró dando clic en una píldora (una app específica), ábrela;
+      // si se entró con el botón "Entrar", ve a la pantalla de Inicio normal.
+      if (window._zxAppPendiente) {
+        var app = window._zxAppPendiente;
+        window._zxAppPendiente = null;
+        abrirApp(app, null);
+      } else {
+        goHome();
+      }
     }
   }, window.ZX_BIENVENIDA || {});
 </script>
@@ -4247,7 +3531,6 @@ window.disableThreadsBackground = initThreadsBackground(document.getElementById(
       '<div class="felic-form">' +
         '<textarea class="felic-ta" rows="2" maxlength="200" placeholder="Escribe tu mensaje de felicitación…"></textarea>' +
         '<input class="felic-au" type="text" maxlength="40" placeholder="Tu nombre (opcional)">' +
-        '<label class="felic-acepto"><input type="checkbox" class="felic-chk"><span>Acepto los <a href="#" data-legal="terminos">Términos y condiciones</a> y el <a href="#" data-legal="privacidad">Aviso de privacidad</a>.</span></label>' +
         '<button type="button" class="felic-enviar">Enviar felicitación</button>' +
         '<div class="felic-status"></div>' +
       '</div>' +
@@ -4289,23 +3572,12 @@ window.disableThreadsBackground = initThreadsBackground(document.getElementById(
     var texto = ta.value.trim().slice(0, 200), autor = au.value.trim().slice(0, 40);
     if (!texto) { st.textContent = 'Escribe un mensaje primero.'; return; }
     if (typeof avisosDb === 'undefined' || !avisosDb || !cur || !cur.clave) { st.textContent = 'No se pudo enviar (sin conexión con la base de datos).'; return; }
-    var chk = box.querySelector('.felic-chk');
-    if (!chk || !chk.checked) { st.textContent = 'Marca la casilla para aceptar los Términos y el Aviso de privacidad.'; return; }
-    var uid = window.ZXAuth && window.ZXAuth.uid();
-    if (!uid) { st.textContent = 'Tu sesión terminó. Vuelve a iniciar sesión.'; return; }
     if (Date.now() - ultimoEnvio < 5000) { st.textContent = 'Espera unos segundos antes de enviar otro.'; return; }
     ultimoEnvio = Date.now();
     btn.disabled = true; st.textContent = 'Enviando…';
-    var claveFelic = cur.clave;
-    window.ZXAuth.registro('felicitacion', 'Casilla marcada en el formulario de felicitación', ['terminos', 'privacidad'])
-      .then(function (reg) {
-        var id = avisosDb.ref('felicitaciones/' + claveFelic).push().key, upd = {};
-        upd['felicitaciones/' + claveFelic + '/' + id] = { mensaje: texto, autor: autor, fecha: Date.now(), uid: uid };
-        upd['aceptaciones/' + uid + '/' + window.ZXAuth.claveRegistro(uid)] = reg;
-        return avisosDb.ref().update(upd);
-      })
+    avisosDb.ref('felicitaciones/' + cur.clave).push({ mensaje: texto, autor: autor, fecha: Date.now() })
       .then(function(){
-        ta.value = ''; chk.checked = false; btn.disabled = false; st.textContent = '¡Mensaje enviado! 🎉';
+        ta.value = ''; btn.disabled = false; st.textContent = '¡Mensaje enviado! 🎉';
         if (!reduce) {
           burst(W / 2, H * 0.5, 120, Math.max(10, Math.min(W, H) / 40));
           if (!raf) raf = requestAnimationFrame(loop);
